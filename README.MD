@@ -7,7 +7,7 @@ The Weather Window: See an AI generated photo of a random city with the current 
 
 - Randomly select a city from the worldcities.csv
 - Query for the current weather, parse single word summery, overcast, sunny, snowing, etc
-- Query Dall-e2 with "/<weather> <city_name> <country> in 16 grayscale"
+- Query Dall-e2 with "\<weather> <city_name> <country> in 16 grayscale"
 
 Hours of Operation (14.5 Hours a day)
 - 4AM - 2PM
