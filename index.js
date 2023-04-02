@@ -1,3 +1,20 @@
+require('dotenv').config({path:__dirname+'/../.env'});
+var grabRandomCity = require('./grabRandomCity.js');
+
+console.log("STARTING PROCESS");
+
+var place = grabRandomCity.grab();
+
+console.log("Grabbed random place", place.city, place.country, place.population);
+
+
+
+
+// DEV TODO
+// get env (serpApi and openAI)
+// parse json
+// get weather API
+// 
 
 
 
