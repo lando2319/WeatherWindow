@@ -1,5 +1,12 @@
 # Weather Window
 
+# UNDER DEVELOPMENT
+I'm waiting for my e paper device to arrive, I've started this repo in preparation.
+
+Information below is for the final product
+
+----
+
 The Weather Window: See an AI generated photo of a random city with the current weather, shown on a e paper display.
 
 # Display

@@ -1,26 +1,37 @@
 require('dotenv').config({path:__dirname+'/../.env'});
 var grabRandomCity = require('./grabRandomCity.js');
+var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 
-console.log("STARTING PROCESS");
+(async () => {
+    try {
+        var date = new Date();
+        var prettyDate = date.toLocaleDateString('en-US', {
+            year: "numeric",
+            month: 'long',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric'
+        });
 
-var place = grabRandomCity.grab();
+        console.log("Starting WeatherWindow Process", prettyDate);
 
-console.log("Grabbed random place", place.city, place.country, place.population);
+        var place = grabRandomCity.grab();
+
+        console.log("Successfully Grabbed Random Place", place.city, place.country, place.population);
 
 
+        var photoURL = await grabGooglePlacePhoto.grab(place.city + " " + place.country);
+
+        console.log("Succesfully Grabbed PhotoURL", photoURL);
+    } catch (err) {
+        console.log(err);
+        process.exit(1);
+    }
+})();
 
 
 // DEV TODO
-// get env (serpApi and openAI)
-// parse json
 // get weather API
-// 
-
-
-
-// get list of cities
-
-
 
 // Dev Process
 // - Clear Screen
@@ -35,9 +46,3 @@ console.log("Grabbed random place", place.city, place.country, place.population)
 // - make photo public and somehow feed that to mpl.com
 // - So if I talk about it I can give a link so people can see the same image
 // - button on device to refresh
-
-
-console.log("starting process");
-
-
-
