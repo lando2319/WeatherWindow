@@ -11,6 +11,7 @@
   "dependencies": {
     "dotenv": "^16.0.3",
     "google-search-results-nodejs": "^2.1.0",
+    "openai": "^3.2.1",
     "request": "^2.88.2"
   }
 }

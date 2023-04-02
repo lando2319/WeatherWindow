@@ -1,6 +1,7 @@
 require('dotenv').config({path:__dirname+'/../.env'});
 var grabRandomCity = require('./grabRandomCity.js');
 var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
+var generateOpenAIImage = require('./generateOpenAIImage.js');
 
 (async () => {
     try {
@@ -19,8 +20,9 @@ var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 
         console.log("Successfully Grabbed Random Place", place.city, place.country, place.population);
 
+        var photoURL = await generateOpenAIImage.grab(place.city + " " + place.country)
 
-        var photoURL = await grabGooglePlacePhoto.grab(place.city + " " + place.country);
+        // var photoURL = await grabGooglePlacePhoto.grab(place.city + " " + place.country);
 
         console.log("Succesfully Grabbed PhotoURL", photoURL);
     } catch (err) {
