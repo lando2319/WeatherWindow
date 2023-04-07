@@ -13,9 +13,13 @@ The Weather Window: See an AI generated photo of a random city with the current 
 
 # To Install
 Clone Repo
+
 cd into repo
+
 run `npm i`
+
 run the command `mv .envExample .env`
+
 add env vars as needed
 
 # Display
