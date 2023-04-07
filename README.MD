@@ -5,9 +5,18 @@ I'm waiting for my e paper device to arrive, I've started this repo in preparati
 
 Information below is for the final product
 
+As of right now you can run `node index.js` and get a photo of a random city
+
 ----
 
 The Weather Window: See an AI generated photo of a random city with the current weather, shown on a e paper display.
+
+# To Install
+Clone Repo
+cd into repo
+run `npm i`
+run the command `mv .envExample .env`
+add env vars as needed
 
 # Display
 [waveshare 10.3inch E-Paper E-Ink Raw Display](https://www.amazon.com/gp/product/B08KDS5VV8/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
