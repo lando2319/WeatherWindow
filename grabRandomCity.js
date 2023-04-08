@@ -11,12 +11,14 @@ function grab() {
         var country = (cityAttributes[4] || "").replace(/"/g, ""); 
         var popraw = (cityAttributes[9] || "").toString();
         var pop = popraw.replace(/"/g, "")
+        var lat_log = (cityAttributes[2] || "") + "," + (cityAttributes[3] || "")
 
         if (pop > 1000000) {
             bigCities.push({
                 city: city,
                 country: country,
-                population: pop.toString()
+                population: pop.toString(),
+                lat_log:lat_log.replace(/"/g, "")
             })
         }
     });

@@ -1,7 +1,11 @@
 require('dotenv').config({path:__dirname+'/../.env'});
+
 var grabRandomCity = require('./grabRandomCity.js');
 var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 var generateOpenAIImage = require('./generateOpenAIImage.js');
+var grabWeatherForecase = require('./grabWeather.js');
+var populationFormatter = require('./populationFormatter.js');
+var tokenCheck = require("./tokenCheck.js");
 
 (async () => {
     try {
@@ -14,31 +18,56 @@ var generateOpenAIImage = require('./generateOpenAIImage.js');
             minute: 'numeric'
         });
 
-        console.log("Starting WeatherWindow Process", prettyDate);
+        console.log("========================\n\nStarting WeatherWindow Process", prettyDate, "\n");
 
-        var place = grabRandomCity.grab();
+        var placePkg = grabRandomCity.grab();
+        var place = placePkg.city + " " + placePkg.country;
+        var pop = populationFormatter.prettyPop(placePkg.population)
 
-        console.log("Successfully Grabbed Random Place", place.city, place.country, place.population);
 
-        var photoURL = await generateOpenAIImage.grab(place.city + " " + place.country)
+        console.log("Successfully Grabbed Random place:");
+        console.log(" CITY/COUNTRY:", placePkg.city, placePkg.country);
+        console.log(" POPULATION:", placePkg.population, "(" + pop + ")");
+        console.log(" LATITUDE, LOGITUDE:", placePkg.lat_log);
 
-        // var photoURL = await grabGooglePlacePhoto.grab(place.city + " " + place.country);
+        var tokenCheckPkg = tokenCheck.check();
+        if (tokenCheckPkg.msg) {
+            console.log("\n", tokenCheckPkg.msg)
+        } 
 
-        console.log("Succesfully Grabbed PhotoURL", photoURL);
+        const randomNum = Math.floor(Math.random() * 2);
+
+        var weatherSummary = "";
+        if (!tokenCheckPkg.slugs.includes("weather") && randomNum != 0) {
+            weatherSummary = await grabWeatherForecase.grab(placePkg.lat_log);
+        }
+
+        var photoURL;
+        if (randomNum == 0 && !tokenCheckPkg.slugs.includes("places")) {
+            console.log("Random Number is", randomNum, "Querying Google Places For Photo of", place);
+            photoURL = await grabGooglePlacePhoto.grab(place);
+        } else if (!tokenCheckPkg.slugs.includes("openai")) {
+            var query = weatherSummary + " weather " + place;
+            console.log("Random Number is", randomNum, "Querying OpenAI For Photo of", query);
+            photoURL = await generateOpenAIImage.grab(query);
+        }
+
+        if (photoURL) {
+            console.log("PHOTO GENERATED:\n\n", photoURL);
+        }
+
+        console.log("\n\nEnding WeatherWindow Process ========================");
+        process.exit(0);
     } catch (err) {
         console.log(err);
         process.exit(1);
     }
 })();
 
-
-// DEV TODO
-// get weather API
-
 // Dev Process
 // - Clear Screen
 // - query city
-// - SHOW city on screen
+// - SHOW city name on screen
 // - query for weather in city
 // - produce final query "Sunny in Chicago in 16 Grayscale"
 // - query dall-e OR google image
