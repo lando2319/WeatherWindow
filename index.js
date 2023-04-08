@@ -47,7 +47,7 @@ var tokenCheck = require("./tokenCheck.js");
             console.log("Random Number is", randomNum, "Querying Google Places For Photo of", place);
             photoURL = await grabGooglePlacePhoto.grab(place);
         } else if (!tokenCheckPkg.slugs.includes("openai")) {
-            var query = weatherSummary + " weather " + place;
+            var query = weatherSummary + " weather in " + place;
             console.log("Random Number is", randomNum, "Querying OpenAI For Photo of", query);
             photoURL = await generateOpenAIImage.grab(query);
         }

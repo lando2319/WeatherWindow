@@ -3,10 +3,14 @@
 # UNDER DEVELOPMENT
 I'm waiting for my e paper device to arrive, I've started this repo in preparation.
 
+As of right now you can run `node index.js` and it'll:
+
+- pick a random city
+- provide a link to a photo of the random city, EITHER (50/50 chance)
+    - a Google Places Photo
+    - an AI Generate Photo of the Current Weather along with the random city, Ex. "Stormy weather in Chicago USA"
+
 Information below is for the final product
-
-As of right now you can run `node index.js` and get a photo of a random city
-
 ----
 
 The Weather Window: See an AI generated photo of a random city with the current weather, shown on a e paper display.
