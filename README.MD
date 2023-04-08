@@ -11,6 +11,7 @@ As of right now you can run `node index.js` and it'll:
     - an AI Generate Photo of the Current Weather along with the random city, Ex. "Stormy weather in Chicago USA"
 
 Information below is for the final product
+
 ----
 
 The Weather Window: See an AI generated photo of a random city with the current weather, shown on a e paper display.
