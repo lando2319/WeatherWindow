@@ -49,6 +49,7 @@ var tokenCheck = require("./tokenCheck.js");
         } else if (!tokenCheckPkg.slugs.includes("openai")) {
             var query = weatherSummary + " weather in " + place;
             console.log("Random Number is", randomNum, "Querying OpenAI For Photo of", query);
+            console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
             photoURL = await generateOpenAIImage.grab(query);
         }
 

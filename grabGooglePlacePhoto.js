@@ -42,7 +42,7 @@ async function grabPlaceID(place) {
                 }
             } else {
                 console.log("ERROR", error)
-                console.log("ERROR", response.toJSON())
+                console.log("ERROR", (response.toJSON() || {}))
                 console.log("ERROR", body)
                 reject()
             }
@@ -62,7 +62,7 @@ async function grabPlacePhotoReferenceID(placeID) {
             if (!error && response.statusCode == 200) {
                 console.log("Successfully grabbed pull request data");
                 var responseData = JSON.parse(response.body);
-                var photos = responseData?.result?.photos;
+                var photos = responseData?.result?.photos || [];
 
                 if (photos.length > 0) {
                     const randomIndex = Math.floor(Math.random() * photos.length);
