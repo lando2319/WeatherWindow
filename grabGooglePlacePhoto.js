@@ -42,7 +42,7 @@ async function grabPlaceID(place) {
                 }
             } else {
                 console.log("ERROR", error)
-                console.log("ERROR", (response.toJSON() || {}))
+                console.log("ERROR", (response || {}).toJSON())
                 console.log("ERROR", body)
                 reject()
             }
