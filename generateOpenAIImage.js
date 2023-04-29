@@ -1,9 +1,9 @@
-require('dotenv').config({path:__dirname+'/.env'})
+require('dotenv').config({ path: __dirname + '/.env' })
 var getCleanError = require("./getCleanError.js");
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
-  apiKey: process.env.OPENAI_API_KEY,
+    apiKey: process.env.OPENAI_API_KEY
 });
 
 const openai = new OpenAIApi(configuration);
@@ -16,13 +16,10 @@ async function grab(query) {
             size: "1024x1024",
         });
         var image_url = response.data.data[0].url;
-        
+
         return image_url
     } catch (err) {
-        console.log("err")
-        console.log(err)
-        console.log(getCleanError.clean(err))
-        process.exit(1)
+        throw getCleanError.clean(err)
     }
 }
 

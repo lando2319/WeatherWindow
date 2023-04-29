@@ -15,8 +15,8 @@ async function grab(place) {
 
         return finalURL
     } catch (err) {
-        console.log(err);
-        process.exit(1);
+        console.log("Error on grabGooglePlacePhoto", err);
+        throw err
     }
 }
 
@@ -42,7 +42,7 @@ async function grabPlaceID(place) {
                 console.log("ERROR", error)
                 console.log("ERROR", (response || {}).toJSON())
                 console.log("ERROR", body)
-                reject()
+                reject(error)
             }
         });
     })
@@ -72,9 +72,9 @@ async function grabPlacePhotoReferenceID(placeID) {
                 }
             } else {
                 console.log("ERROR", error)
-                console.log("ERROR", response.toJSON())
+                console.log("ERROR", (response || {}).toJSON())
                 console.log("ERROR", body)
-                reject()
+                reject(error)
             }
         });
     })

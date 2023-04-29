@@ -9,8 +9,8 @@ async function grab(lat_log) {
 
         return summary
     } catch (err) {
-        console.log("ERROR on pirateweather", err);
-        process.exit(1);
+        console.log("Error on grabWeather", err);
+        throw err
     }
 }
 

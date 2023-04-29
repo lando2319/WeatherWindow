@@ -6,6 +6,7 @@ var generateOpenAIImage = require('./generateOpenAIImage.js');
 var grabWeatherForecase = require('./grabWeather.js');
 var populationFormatter = require('./populationFormatter.js');
 var genHTML = require('./genHTML.js');
+var genErrorPage = require('./genErrorPage.js');
 var tokenCheck = require("./tokenCheck.js");
 
 var date = new Date();
@@ -64,7 +65,6 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
         console.log("\n\nEnding WeatherWindow Process ========================");
         process.exit(0);
     } catch (err) {
-        console.log(err);
-        process.exit(1);
+        await genErrorPage.gen(err);
     }
 })();
