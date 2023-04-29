@@ -39,10 +39,12 @@ async function grabPlaceID(place) {
                     reject("no place_id found for " + place);
                 }
             } else {
-                console.log("ERROR", error)
-                // console.log("ERROR", (response || {}).toJSON())
-                console.log("ERROR", body)
-                reject(error)
+                var finalError = JSON.parse(error || body);
+
+                finalError.errorLocation = "grabGooglePlacePhoto grabPlaceID";
+                finalError.query = place;
+
+                reject(finalError)
             }
         });
     })
