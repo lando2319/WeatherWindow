@@ -3,9 +3,7 @@ var request = require('request');
 
 async function grab(place) {
     try {
-
         console.log("Grabbing Google Place Photo for", place);
-                                // Chicago
         var place_id = await grabPlaceID(place);
         console.log("Successfully Grabbed Google Place ID:", place_id);
 
