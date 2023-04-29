@@ -1,1 +1,1 @@
-node index.js && open home.html
+node index.js

@@ -33,7 +33,7 @@ async function grabPlaceID(place) {
                 console.log("Successfully grabbed pull request data");
                 var responseData = JSON.parse(response.body);
 
-                if (responseData.candidates?.length > 0) {
+                if (responseData.candidates && responseData.candidates.length > 0) {
                     resolve(responseData.candidates[0].place_id);
                 } else {
                     reject("no place_id found for " + place);
@@ -62,7 +62,7 @@ async function grabPlacePhotoReferenceID(placeID) {
             if (!error && response.statusCode == 200) {
                 console.log("Successfully grabbed pull request data");
                 var responseData = JSON.parse(response.body);
-                var photos = responseData?.result?.photos || [];
+                var photos = responseData && responseData.result && responseData.result.photos || [];
 
                 if (photos.length > 0) {
                     const randomIndex = Math.floor(Math.random() * photos.length);
