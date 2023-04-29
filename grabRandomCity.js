@@ -17,7 +17,7 @@ function grab() {
             bigCities.push({
                 city: city,
                 country: country,
-                population: pop.toString(),
+                rawPopulation: pop.toString(),
                 lat_log:lat_log.replace(/"/g, "")
             })
         }

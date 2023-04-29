@@ -29,7 +29,7 @@ function check() {
             slugs:slugs
         };
 
-        returnPkg.msg = "For the FULL EXPERIENCE Download the following tokens\n" + tokenMessages.join("\n\n");
+        returnPkg.msg = "For the FULL EXPERIENCE Download the following tokens\n\nFor now, I'll do what I can\n\n" + tokenMessages.join("\n\n");
 
         return returnPkg
     } else {
