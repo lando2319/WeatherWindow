@@ -36,11 +36,11 @@ async function grabPlaceID(place) {
                 if (responseData.candidates?.length > 0) {
                     resolve(responseData.candidates[0].place_id);
                 } else {
-                    reject("no place_id found");
+                    reject("no place_id found for " + place);
                 }
             } else {
                 console.log("ERROR", error)
-                console.log("ERROR", (response || {}).toJSON())
+                // console.log("ERROR", (response || {}).toJSON())
                 console.log("ERROR", body)
                 reject(error)
             }
@@ -72,7 +72,7 @@ async function grabPlacePhotoReferenceID(placeID) {
                 }
             } else {
                 console.log("ERROR", error)
-                console.log("ERROR", (response || {}).toJSON())
+                // console.log("ERROR", (response || {}).toJSON())
                 console.log("ERROR", body)
                 reject(error)
             }
