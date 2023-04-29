@@ -42,3 +42,5 @@ Hours of Operation (14.5 Hours a day)
 Cities Data list from:
 
 https://simplemaps.com/data/world-cities
+
+Image from testImagePage.html may be subject to copyright
