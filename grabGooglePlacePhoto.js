@@ -24,7 +24,7 @@ async function grab(place) {
 async function grabPlaceID(place) {
     return new Promise(function (resolve, reject) {
         var cleanPlace = cleanPlaceQuery.clean(place);
-        console.log("Packged query for API call, FROM", query, "TO", cleanQuery);
+        console.log("Packged query for API call, FROM", place, "TO", cleanPlace);
         var url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + cleanPlace + "&inputtype=textquery&key=" + process.env.GOOGLE_PLACES_API_KEY;
 
         request({
