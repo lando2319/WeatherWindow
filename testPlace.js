@@ -5,7 +5,8 @@ var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 
 
 
-var query = "Ludhiāna India";
+// var query = "Ludhiāna India";
+var query = "Ludhiana India";
 
 
 

@@ -1,6 +1,6 @@
 require('dotenv').config({path:__dirname+'/.env'});
 var request = require('request');
-var cleanPlaceQuery = require(',/utility/cleanPlaceQuery.js');
+var cleanPlaceQuery = require('./utility/packageQuery.js');
 
 async function grab(place) {
     try {
@@ -17,14 +17,15 @@ async function grab(place) {
         return finalURL
     } catch (err) {
         console.log("Error on grabGooglePlacePhoto", err);
-        throw packageError(err);
+        throw packageError(err, place);
     }
 }
 
 async function grabPlaceID(place) {
     return new Promise(function (resolve, reject) {
-        var cleanPlace = "";
-        var url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + place + "&inputtype=textquery&key=" + process.env.GOOGLE_PLACES_API_KEY;
+        var cleanPlace = cleanPlaceQuery.clean(place);
+        console.log("Packged query for API call, FROM", query, "TO", cleanQuery);
+        var url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + cleanPlace + "&inputtype=textquery&key=" + process.env.GOOGLE_PLACES_API_KEY;
 
         request({
             url: url,
@@ -81,8 +82,8 @@ async function grabPlacePhotoReferenceID(placeID) {
     })
 }
 
-function packageError(error) {
-    var finalError = JSON.parse(error);
+function packageError(error, place) {
+    var finalError = JSON.parse(JSON.stringify(error));
 
     finalError.errorLocation = "grabGooglePlacePhoto grabPlaceID";
     finalError.query = place;
