@@ -1,0 +1,14 @@
+.container img {
+    width: 100%;
+    height: 85%;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+.container {
+    height: 100%;
+}

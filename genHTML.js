@@ -6,13 +6,17 @@ async function gen(pkg) {
         const html = `
         <!DOCTYPE html>
         <html>
+            <head>
+                <title>Weather Window</title>
+            </head>
+            <link rel="stylesheet" type="text/css" href="style.css">
             <body>
-                <center>
-                    <img src=${pkg.photoURL} style="object-fit: contain;" >
+                <div class="container" >
+                    <img src=${pkg.photoURL} >
                     <h1>${pkg.place}</h1>
                     <h2>${pkg.population}</h2>
                     <h2>${pkg.source} Query: "${pkg.query}"</h2>
-                </center>
+                </div>
             </body>
         </html>
         `;

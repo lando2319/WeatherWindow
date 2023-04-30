@@ -5,6 +5,7 @@ var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 var generateOpenAIImage = require('./generateOpenAIImage.js');
 var grabWeatherForecase = require('./grabWeather.js');
 var populationFormatter = require('./populationFormatter.js');
+var splicyUpMyQuery = require('./utility/splicyUpMyQuery.js');
 var genHTML = require('./genHTML.js');
 var genErrorPage = require('./genErrorPage.js');
 var tokenCheck = require("./tokenCheck.js");
@@ -52,6 +53,11 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
         } else if (!tokenCheckPkg.slugs.includes("openai")) {
             pkg.source = "OpenAI DALL-E";
             pkg.query = weatherSummary + " weather in " + pkg.place;
+
+            // EXPERIMENTAL
+            // Producting strange results
+            // pkg.query = splicyUpMyQuery.spiceThis(pkg.query);
+
             console.log("Querying OpenAI For Photo of", pkg.query);
             console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
             pkg.photoURL = await generateOpenAIImage.grab(pkg.query);
