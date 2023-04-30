@@ -1,4 +1,5 @@
 var request = require('request');
+var errorHandling = require('./utility/errorHandling.js');
 
 async function grab(lat_log) {
     try {
@@ -10,7 +11,8 @@ async function grab(lat_log) {
         return summary
     } catch (err) {
         console.log("Error on grabWeather", err);
-        throw err
+        var finalError = errorHandling.package(err, lat_log, "grabWeatherFromAPI")
+        throw finalError
     }
 }
 
@@ -32,7 +34,12 @@ async function grabWeatherFromAPI(url) {
 
                 resolve(responseData.currently.summary);
             } else {
-                reject(error);
+                // console.log("WEATHER ERROR");
+                // console.log(error);
+                // console.log(response);
+                // console.log(body);
+
+                reject(error || body);
             }
         });
     })

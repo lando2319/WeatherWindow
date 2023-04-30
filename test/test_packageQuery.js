@@ -15,4 +15,12 @@ describe("Testing cleaning the Place Query", function() {
 
         assert.equal(cleanQuery, "Aligarh India")
     })
+
+    it('With Sūrat India should turn to Aligarh India', function() {
+        var query = "Sūrat India";
+        var cleanQuery = cleanPlaceQuery.clean(query);
+
+        assert.equal(cleanQuery, "Surat India")
+    })
+
 })

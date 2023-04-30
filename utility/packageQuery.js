@@ -4,6 +4,7 @@ function clean(query) {
     cleanQuery = cleanQuery.replace("ī", "i");
     cleanQuery = cleanQuery.replace("ã", "a");
     cleanQuery = cleanQuery.replace("ç", "c");
+    cleanQuery = cleanQuery.replace("ū", "u");
     
     return cleanQuery;
 }

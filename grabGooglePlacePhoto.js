@@ -1,6 +1,7 @@
 require('dotenv').config({path:__dirname+'/.env'});
 var request = require('request');
 var cleanPlaceQuery = require('./utility/packageQuery.js');
+var errorHandling = require('./utility/errorHandling.js');
 
 async function grab(place) {
     try {
@@ -17,7 +18,7 @@ async function grab(place) {
         return finalURL
     } catch (err) {
         console.log("Error on grabGooglePlacePhoto", err);
-        throw packageError(err, place);
+        throw errorHandling.package(err, place, "grabGooglePlacePhoto grabPlaceID");
     }
 }
 
@@ -44,7 +45,7 @@ async function grabPlaceID(place) {
                     reject("no place_id found for " + place);
                 }
             } else {
-                reject(packageError(error || body))
+                reject(error || body)
             }
         });
     })
@@ -81,15 +82,5 @@ async function grabPlacePhotoReferenceID(placeID) {
         });
     })
 }
-
-function packageError(error, place) {
-    var finalError = JSON.parse(JSON.stringify(error));
-
-    finalError.errorLocation = "grabGooglePlacePhoto grabPlaceID";
-    finalError.query = place;
-
-    return finalError
-};
-
 
 module.exports.grab = grab;

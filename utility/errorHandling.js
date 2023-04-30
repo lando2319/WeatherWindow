@@ -14,4 +14,16 @@ function clean(err) {
     return finalError
 }
 
+function package(error, query, errorLocation) {
+    // This is not working very well
+    // ideally I'd clone the error and add the fields
+    var finalError = Object.create(error);
+
+    finalError.errorLocation = errorLocation;
+    finalError.query = query;
+
+    return finalError
+};
+
 module.exports.clean = clean;
+module.exports.package = package;

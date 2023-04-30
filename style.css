@@ -1,5 +1,6 @@
 .container img {
-    height: 85%;
+    height: 85vw;
+    max-width: 100%;
 }
 
 html, body {
