@@ -8,7 +8,7 @@ async function gen(pkg) {
         <html>
             <body>
                 <center>
-                    <img src=${pkg.photoURL} >
+                    <img src=${pkg.photoURL} style="object-fit: contain;" >
                     <h1>${pkg.place}</h1>
                     <h2>${pkg.population}</h2>
                     <h2>${pkg.source} Query: "${pkg.query}"</h2>
