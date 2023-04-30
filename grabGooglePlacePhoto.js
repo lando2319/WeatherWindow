@@ -1,5 +1,6 @@
 require('dotenv').config({path:__dirname+'/.env'});
 var request = require('request');
+var cleanPlaceQuery = require(',/utility/cleanPlaceQuery.js');
 
 async function grab(place) {
     try {
@@ -16,14 +17,17 @@ async function grab(place) {
         return finalURL
     } catch (err) {
         console.log("Error on grabGooglePlacePhoto", err);
-        throw err
+        throw packageError(err);
     }
 }
 
 async function grabPlaceID(place) {
     return new Promise(function (resolve, reject) {
+        var cleanPlace = "";
+        var url = "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + place + "&inputtype=textquery&key=" + process.env.GOOGLE_PLACES_API_KEY;
+
         request({
-            url: "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=" + place + "&inputtype=textquery&key=" + process.env.GOOGLE_PLACES_API_KEY,
+            url: url,
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -39,12 +43,7 @@ async function grabPlaceID(place) {
                     reject("no place_id found for " + place);
                 }
             } else {
-                var finalError = JSON.parse(error || body);
-
-                finalError.errorLocation = "grabGooglePlacePhoto grabPlaceID";
-                finalError.query = place;
-
-                reject(finalError)
+                reject(packageError(error || body))
             }
         });
     })
@@ -81,5 +80,15 @@ async function grabPlacePhotoReferenceID(placeID) {
         });
     })
 }
+
+function packageError(error) {
+    var finalError = JSON.parse(error);
+
+    finalError.errorLocation = "grabGooglePlacePhoto grabPlaceID";
+    finalError.query = place;
+
+    return finalError
+};
+
 
 module.exports.grab = grab;

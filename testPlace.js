@@ -5,7 +5,7 @@ var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 
 
 
-var query = "Kansas USA";
+var query = "Ludhiāna India";
 
 
 

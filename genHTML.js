@@ -17,7 +17,7 @@ async function gen(pkg) {
         </html>
         `;
 
-        await fs.promises.writeFile('home.html', html);
+        await fs.promises.writeFile(__dirname+'/home.html', html);
         
     } catch (err) {
         console.log("Error on genHTML", err);

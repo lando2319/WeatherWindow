@@ -3,7 +3,7 @@ const fs = require('fs');
 function grab() {
     var bigCities = [];
 
-    const lines = fs.readFileSync('./worldcities.csv', 'utf8').split('\n');
+    const lines = fs.readFileSync(__dirname+'/worldcities.csv', 'utf8').split('\n');
 
     lines.forEach(line => {
         var cityAttributes = line.split(',');
