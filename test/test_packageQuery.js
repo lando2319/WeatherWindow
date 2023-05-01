@@ -43,4 +43,11 @@ describe("Testing cleaning the Place Query", function() {
 
         assert.equal(cleanQuery, "Yanan China")
     })
+
+    it('With Ürümqi China should turn to Urumqi China', function() {
+        var query = "Ürümqi China";
+        var cleanQuery = packageQuery.clean(query);
+
+        assert.equal(cleanQuery, "Urumqi China")
+    })
 })
