@@ -8,6 +8,7 @@ function clean(query) {
     cleanQuery = cleanQuery.replace("ê", "e");
     cleanQuery = cleanQuery.replace("ò", "o");
     cleanQuery = cleanQuery.replace("ā", "a");
+    cleanQuery = cleanQuery.replace("’", "");
     
     cleanQuery = replaceAccents(cleanQuery);
 
