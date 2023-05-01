@@ -5,7 +5,7 @@ var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 var generateOpenAIImage = require('./generateOpenAIImage.js');
 var grabWeatherForecase = require('./grabWeather.js');
 var populationFormatter = require('./populationFormatter.js');
-var splicyUpMyQuery = require('./utility/splicyUpMyQuery.js');
+var spiceUpMyQuery = require('./utility/spiceUpMyQuery.js');
 var genHTML = require('./genHTML.js');
 var genErrorPage = require('./genErrorPage.js');
 var tokenCheck = require("./tokenCheck.js");
@@ -56,7 +56,7 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
 
             // EXPERIMENTAL
             // Producting strange results
-            // pkg.query = splicyUpMyQuery.spiceThis(pkg.query);
+            // pkg.query = spiceUpMyQuery.spiceThis(pkg.query);
 
             console.log("Querying OpenAI For Photo of", pkg.query);
             console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
