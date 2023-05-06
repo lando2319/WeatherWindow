@@ -13,9 +13,7 @@ async function gen(pkg) {
             <body>
                 <div class="container" >
                     <img src=${pkg.photoURL} >
-                    <h1>${pkg.place}</h1>
-                    <h2>${pkg.population}</h2>
-                    <h2>${pkg.source} Query: "${pkg.query}"</h2>
+                    <h2>${pkg.place} - ${pkg.population} - ${pkg.source} Query: "${pkg.query}"</h2>
                 </div>
             </body>
         </html>

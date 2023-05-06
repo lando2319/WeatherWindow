@@ -21,6 +21,18 @@ var prettyDate = date.toLocaleDateString('en-US', {
 
 console.log("========================\n\nStarting WeatherWindow Process", prettyDate, "\n");
 
+
+
+
+// EXPERIMENTAL
+// 0 is no spice
+// 10 is pure spice
+var spiceRating = 5;
+
+
+
+
+
 (async () => {
     try {
         var pkg = grabRandomCity.grab();
@@ -56,7 +68,7 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
 
             // EXPERIMENTAL
             // Producting strange results
-            // pkg.query = spiceUpMyQuery.spiceThis(pkg.query);
+            pkg.query = spiceUpMyQuery.spiceThis(pkg.query, spiceRating);
 
             console.log("Querying OpenAI For Photo of", pkg.query);
             console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
