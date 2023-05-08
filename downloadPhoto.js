@@ -8,7 +8,7 @@ async function go(url, name) {
         const buffer = Buffer.from(arrayBuffer);
 
         var formattedName = name.toLowerCase() 
-        formattedName = formattedName.replace(" ", "_") + "-" + Date.now() + ".png";
+        formattedName = formattedName.replace(/ /g, "-") + "-" + Date.now() + ".png";
         var finalPwd = "/media/lando2319/86B8-0910/" + formattedName;
 
         await fs.writeFileSync(finalPwd, buffer);
