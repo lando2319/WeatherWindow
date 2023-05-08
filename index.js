@@ -9,6 +9,8 @@ var spiceUpMyQuery = require('./utility/spiceUpMyQuery.js');
 var genHTML = require('./genHTML.js');
 var genErrorPage = require('./genErrorPage.js');
 var tokenCheck = require("./tokenCheck.js");
+var downloadPhoto = require("./downloadPhoto.js");
+var tweetPhoto = require("./tweetPhoto.js");
 
 var date = new Date();
 var prettyDate = date.toLocaleDateString('en-US', {
@@ -73,6 +75,14 @@ var spiceRating = 5;
             console.log("Querying OpenAI For Photo of", pkg.query);
             console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
             pkg.photoURL = await generateOpenAIImage.grab(pkg.query);
+
+            console.log("Downloading Photo");
+            var photoPWD = await downloadPhoto.go(pkg.photoURL, pkg.query);
+            console.log("Photo Downloaded Successfully");
+
+            console.log("Posting Photo To Twitter");
+            await tweetPhoto.post(photoPWD, pkg.query);
+            console.log("Successfully Posted To Twitter");
         }
 
         if (pkg.photoURL) {
