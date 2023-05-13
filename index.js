@@ -1,5 +1,3 @@
-require('dotenv').config({path:__dirname+'/../.env'});
-
 var grabRandomCity = require('./grabRandomCity.js');
 var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
 var generateOpenAIImage = require('./generateOpenAIImage.js');
@@ -55,16 +53,16 @@ var spiceRating = 5;
         console.log("Random Number is", randomNum);
 
         var weatherSummary = "";
-        if (!tokenCheckPkg.slugs.includes("weather") && randomNum != 0) {
+        if (!tokenCheckPkg.missingTokens.includes("weather") && randomNum != 0) {
             weatherSummary = await grabWeatherForecase.grab(pkg.lat_log);
         }
 
-        if (randomNum == 0 && !tokenCheckPkg.slugs.includes("places")) {
+        if (randomNum == 0 && !tokenCheckPkg.missingTokens.includes("places")) {
             pkg.source = "Google Places";
             pkg.query = pkg.place;
             console.log("Querying Google Places For Photo of", pkg.query);
             pkg.photoURL = await grabGooglePlacePhoto.grab(pkg.query);
-        } else if (!tokenCheckPkg.slugs.includes("openai")) {
+        } else if (!tokenCheckPkg.missingTokens.includes("openai")) {
             pkg.source = "OpenAI DALL-E";
             pkg.query = weatherSummary + " weather in " + pkg.place;
 
@@ -78,16 +76,18 @@ var spiceRating = 5;
 
             console.log("Downloading Photo");
             var photoPWD = await downloadPhoto.go(pkg.photoURL, pkg.query);
-            console.log("Photo Downloaded Successfully");
+            console.log("Photo Downloaded Successfully to", photoPWD);
 
-            console.log("Posting Photo To Twitter");
-            await tweetPhoto.post(photoPWD, pkg.query);
-            console.log("Successfully Posted To Twitter");
+            if (!tokenCheckPkg.missingTokens.includes("twitter")) {
+                console.log("Posting Photo To Twitter");
+                await tweetPhoto.post(photoPWD, pkg.query);
+                console.log("Successfully Posted To Twitter");
+            }
         }
 
         if (pkg.photoURL) {
             await genHTML.gen(pkg);
-            console.log("HTML Page Successfully Generated");
+            console.log("HTML Page Successfully Generated open ./home.html");
         }
 
         console.log("\n\nEnding WeatherWindow Process ========================");

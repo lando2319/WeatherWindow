@@ -1,6 +1,8 @@
 .env
 /node_modules/
 /favs/
+/Photos/*
+!/Photos/.gitkeep
 tester.js
 home.html
 .vscode/
