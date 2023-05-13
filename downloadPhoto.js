@@ -1,4 +1,5 @@
 require('dotenv').config({ path: __dirname + '/.env' });
+var formatName = require("./utility/formatPhotoName.js");
 const fs = require('fs');
 
 async function go(url, name) {
@@ -8,8 +9,7 @@ async function go(url, name) {
         const arrayBuffer = await blob.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        var formattedName = name.toLowerCase() 
-        formattedName = formattedName.replace(/ /g, "-") + "-" + Date.now() + ".png";
+        var formattedName = formatName.run(name, Date.now());
         var finalPwd = process.env.PHOTO_PWD + formattedName;
 
         await fs.writeFileSync(finalPwd, buffer);
