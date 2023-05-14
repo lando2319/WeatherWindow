@@ -82,6 +82,13 @@ var spiceRating = 5;
                 console.log("Posting Photo To Twitter");
                 await tweetPhoto.post(photoPWD, pkg.query);
                 console.log("Successfully Posted To Twitter");
+
+                // jump in here, return the media id from twitter
+                // write to the metadata
+
+                // Then a whole other function for finding Then AND Now images
+                // 
+                
             }
         }
 

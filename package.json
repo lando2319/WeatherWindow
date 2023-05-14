@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
+    "exiftool-vendored": "^22.0.0",
     "google-search-results-nodejs": "^2.1.0",
     "mocha": "^10.2.0",
     "openai": "^3.2.1",
