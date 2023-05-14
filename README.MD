@@ -31,6 +31,7 @@ run the command `mv .envExample .env`
 
 add env vars as needed to `.env`
 
+`node index.js` will run the program
 
 # More
 Hours of Operation (14.5 Hours a day)
