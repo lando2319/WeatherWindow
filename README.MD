@@ -1,20 +1,24 @@
 # Weather Window
 
-# UNDER DEVELOPMENT
-I'm waiting for my e paper device to arrive, I've started this repo in preparation.
+A.I. Generated Photo Of Current Weather In A Random City - “Cloudy weather in Luanda Angola”
 
-As of right now you can run `node index.js` and it'll:
+This code is powering the [Weather Window AI Twitter Account](https://twitter.com/WeatherWindowAI)
+
+This code will
 
 - pick a random city
 - provide a link to a photo of the random city, EITHER (50/50 chance)
     - a Google Places Photo
     - an AI Generate Photo of the Current Weather along with the random city, Ex. "Stormy weather in Chicago USA"
 
-Information below is for the final product
+- If it's an OpenAI Image, it'll save the image
+- Generate an HTML Page
+- Tweet the photo to the fans
+- Opens the HTML Page on my E Paper device
+
+[See Blog Post For More](https://mikepland.com/portfolio/dall-e/2023/05/13/Weather-Window-AI/)
 
 ----
-
-The Weather Window: See an AI generated photo of a random city with the current weather, shown on a e paper display.
 
 # To Install
 Clone Repo
@@ -25,15 +29,11 @@ run `npm i`
 
 run the command `mv .envExample .env`
 
-add env vars as needed
+add env vars as needed to `.env`
 
-# Display
-[waveshare 10.3inch E-Paper E-Ink Raw Display](https://www.amazon.com/gp/product/B08KDS5VV8/ref=ppx_yo_dt_b_asin_title_o00_s00?ie=UTF8&psc=1)
+`node index.js` will run the program
 
-- Randomly select a city from the worldcities.csv
-- Query for the current weather, parse single word summery, overcast, sunny, snowing, etc
-- Query Dall-e2 with "\<weather> <city_name> <country> in 16 grayscale"
-
+# More
 Hours of Operation (14.5 Hours a day)
 - 4AM - 2PM
 - 4:30PM - 10PM
@@ -42,5 +42,3 @@ Hours of Operation (14.5 Hours a day)
 Cities Data list from:
 
 https://simplemaps.com/data/world-cities
-
-Image from testImagePage.html may be subject to copyright
