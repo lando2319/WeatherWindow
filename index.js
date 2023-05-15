@@ -9,6 +9,7 @@ var genErrorPage = require('./genErrorPage.js');
 var tokenCheck = require("./tokenCheck.js");
 var downloadPhoto = require("./downloadPhoto.js");
 var tweetPhoto = require("./tweetPhoto.js");
+var metadataTool = require("./utility/metadataTool.js");
 
 var date = new Date();
 var prettyDate = date.toLocaleDateString('en-US', {
@@ -80,15 +81,12 @@ var spiceRating = 5;
 
             if (!tokenCheckPkg.missingTokens.includes("twitter")) {
                 console.log("Posting Photo To Twitter");
-                await tweetPhoto.post(photoPWD, pkg.query);
+                var mediaID = await tweetPhoto.post(photoPWD, pkg.query);
                 console.log("Successfully Posted To Twitter");
 
-                // jump in here, return the media id from twitter
-                // write to the metadata
-
-                // Then a whole other function for finding Then AND Now images
-                // 
-                
+                console.log("Adding MediaID", mediaID);
+                await metadataTool.addMediaID(photoPWD, mediaID);
+                console.log("Successfully added Media id", mediaID);
             }
         }
 

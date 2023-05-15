@@ -4,5 +4,6 @@
 /Photos/*
 !/Photos/.gitkeep
 tester.js
+tester2.js
 home.html
 .vscode/

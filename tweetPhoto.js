@@ -28,7 +28,7 @@ async function post(filePWD, query) {
 
         console.log("Successfully Tweeted Photo");
 
-        return
+        return mediaId
     } catch (e) {
         throw("tweetPhoto Error " + e)
     }
