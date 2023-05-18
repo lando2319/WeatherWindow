@@ -12,6 +12,8 @@ function clean(query) {
     cleanQuery = cleanQuery.replace("ü", "u");
     cleanQuery = cleanQuery.replace("Ü", "U");
     cleanQuery = cleanQuery.replace("ā", "a");
+    cleanQuery = cleanQuery.replace("Ō", "O");
+    cleanQuery = cleanQuery.replace("ō", "o");
     
     cleanQuery = replaceAccents(cleanQuery);
 
