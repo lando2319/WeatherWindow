@@ -30,34 +30,24 @@ async function post(filePWD, query) {
 
         return mediaId
     } catch (e) {
-        throw("tweetPhoto Error " + e)
+        throw("post Error " + e)
     }
 }
 
 async function postHistoricalTweet(historyPkg) {
     try {
 
-        console.log("Posting Historical tweet")
-
-        var msg = "Then And Now: " + historyPkg.dates + "\nOpenAI DALL-E AI Generated Photos\n\nQuery: \"" + historyPkg.query + "\"";
-
+        var msg = "Then And Now:\n\n" + historyPkg.dates + "\nOpenAI DALL-E AI Generated Photos\n\nQuery: \"" + historyPkg.query + "\"";
         
-        console.log(msg);
-        console.log(historyPkg.mediaIDs);
-        // process.exit(0);
+        var { data: createdTweet } = await client.v2.tweet(msg, { 
+            media: { 
+                media_ids: historyPkg.mediaIDs 
+            } 
+        });
 
-        // var { data: createdTweet } = await client.v2.tweet(msg, { 
-        //     media: { 
-        //         media_ids: historyPkg.mediaIDs 
-        //     } 
-        // });
-
-        // console.log("Successfully Tweeted Photo");
-
-        // return createdTweet.id
-        return "931241241422134"
+        return createdTweet.id
     } catch (e) {
-        throw("tweetPhoto Error " + e)
+        throw("postHistoricalTweet Error " + e)
     }
 }
 

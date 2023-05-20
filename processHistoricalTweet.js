@@ -1,7 +1,7 @@
 require('dotenv').config({path:__dirname+'/.env'});
 const fs = require("fs");
 const files = fs.readdirSync(process.env.PHOTO_PWD);
-// var metadataTool = require("./utility/metadataTool.js");
+var metadataTool = require("./utility/metadataTool.js");
 var tweetPhoto = require("./utility/twitterTool.js");
 
 var payloadPackager = require("./utility/payloadPackager.js");
@@ -56,20 +56,20 @@ function getLatestFile(directory) {
 (async () => {
     try {
         var loggit = "processHistoricalTweet";
-        // const latestFileWithPWD = await getLatestFile(process.env.PHOTO_PWD);
-        const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
+        const latestFileWithPWD = await getLatestFile(process.env.PHOTO_PWD);
+        // const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
         console.log(loggit, 'Latest file with pathway:', latestFileWithPWD);
 
         const filePWDPieces = latestFileWithPWD.split("/");
         const filename = filePWDPieces[filePWDPieces.length - 1];
         console.log(loggit, 'Latest file:', filename);
 
-        // var currentMetadata = await metadataTool.read(latestFileWithPWD);
+        var currentMetadata = await metadataTool.read(latestFileWithPWD);
 
-        // if (currentMetadata.ImageHistory) {
-        //     console.log(loggit, "Image already Tweeted as Then And Now, ImageHistory is", currentMetadata.ImageHistory);
-        //     return
-        // }
+        if (currentMetadata.ImageHistory) {
+            console.log(loggit, "Image already Tweeted as Then And Now, ImageHistory is", currentMetadata.ImageHistory);
+            return
+        }
 
         var parts = filename.split('-');
         var index = parts.findIndex(part => part.match(/\d+/));
@@ -77,11 +77,7 @@ function getLatestFile(directory) {
 
         console.log(loggit, "query portion of file name", query);
 
-        // const matchingFiles = await files.filter(file => file.startsWith(query));
-        const matchingFiles = [
-            "cloudy-weather-in-zhongwei-china-in-hatching-style-1684111111111.png",
-            "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png"
-        ]
+        const matchingFiles = await files.filter(file => file.startsWith(query));
 
         if (matchingFiles.length < 2) {
             console.log(loggit, "No past photos found, Ending Process");
@@ -95,8 +91,7 @@ function getLatestFile(directory) {
         historyPkg.mediaIDs = [];
         for (fileIndex in historyPkg.filenames) {
             var historicalFilename = historyPkg.filenames[fileIndex];
-            // var currentMetadata = await metadataTool.read(process.env.PHOTO_PWD + historicalFilename);
-            var currentMetadata = {ImageUniqueID:Date.now()}
+            var currentMetadata = await metadataTool.read(process.env.PHOTO_PWD + historicalFilename);
             historyPkg.mediaIDs.push(currentMetadata.ImageUniqueID);
         }
 
@@ -104,7 +99,7 @@ function getLatestFile(directory) {
         var tweetID = await tweetPhoto.postHistoricalTweet(historyPkg);
         console.log(loggit, "Successfully Posted Historical Tweet, adding id", tweetID, "to the metadata");
 
-        // await metadataTool.addHistoricalTweetID(filename, tweetID);
+        await metadataTool.addHistoricalTweetID(latestFileWithPWD, tweetID);
         console.log(loggit, "Successfully updated metadata");
         console.log(loggit, "Process Done");
         process.exit(0);
