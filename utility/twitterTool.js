@@ -37,7 +37,7 @@ async function post(filePWD, query) {
 async function postHistoricalTweet(historyPkg) {
     try {
 
-        var msg = "Then And Now:\n\n" + historyPkg.dates + "\nOpenAI DALL-E AI Generated Photos\n\nQuery: \"" + historyPkg.query + "\"";
+        var msg = "Then And Now:\n" + historyPkg.dates + "\nOpenAI DALL-E AI Generated Photos\n\nQuery: \"" + historyPkg.query + "\"";
         
         var { data: createdTweet } = await client.v2.tweet(msg, { 
             media: { 
