@@ -34,4 +34,29 @@ async function post(filePWD, query) {
     }
 }
 
+async function postMultiplePhotos(historyPkg) {
+    try {
+
+        console.log("Posting tweet...")
+
+        var msg = "HISTORY " + historyPkg.times.join(" • ") + "\nOpenAI DALL-E AI Generated Photo\n\nQuery: \"" + historyPkg.query + "\"";
+
+        console.log(msg);
+        process.exit(0);
+
+        // await client.v2.tweet(msg, { 
+        //     media: { 
+        //         media_ids: [mediaId] 
+        //     } 
+        // });
+
+        // console.log("Successfully Tweeted Photo");
+
+        // return mediaId
+    } catch (e) {
+        throw("tweetPhoto Error " + e)
+    }
+}
+
 module.exports.post = post;
+module.exports.postMultiplePhotos = postMultiplePhotos;

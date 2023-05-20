@@ -1,6 +1,4 @@
 const fs = require('fs');
-// const exifReader = require('exifreader');
-// const exiftool = require('exiftool');
 const exiftool = require('exiftool-vendored').exiftool;
 
 
@@ -17,11 +15,7 @@ async function addMediaID(photoPWD, mediaID) {
 async function read(photoPWD) {
     try {
         var metadata = await exiftool.read(photoPWD);
-        console.log(metadata);
-    //     const tags = await exifReader.load(photoPWD);
-    //     console.log("tags");
-    //     console.log(tags);
-        return
+        return metadata
     } catch (err) {
         console.log("Error on metadataTool.read", err);
         process.exit(1);
