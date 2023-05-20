@@ -50,13 +50,11 @@ function getLatestFile(directory) {
     });
 }
 
-// KNOWN DUP
-// const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
-
 (async () => {
     try {
         var loggit = "processHistoricalTweet";
         const latestFileWithPWD = await getLatestFile(process.env.PHOTO_PWD);
+        // put in file and run if backfill is needed
         // const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
         console.log(loggit, 'Latest file with pathway:', latestFileWithPWD);
 
@@ -68,7 +66,7 @@ function getLatestFile(directory) {
 
         if (currentMetadata.ImageHistory) {
             console.log(loggit, "Image already Tweeted as Then And Now, ImageHistory is", currentMetadata.ImageHistory);
-            return
+            process.exit(0);
         }
 
         var parts = filename.split('-');
@@ -82,7 +80,6 @@ function getLatestFile(directory) {
         if (matchingFiles.length < 2) {
             console.log(loggit, "No past photos found, Ending Process");
             process.exit(0);
-            return
         };
 
         console.log(loggit, "Found", matchingFiles.length, "matching photos, generating history package");
