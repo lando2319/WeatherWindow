@@ -1,10 +1,10 @@
 require('dotenv').config({path:__dirname+'/.env'});
 const fs = require("fs");
 const files = fs.readdirSync(process.env.PHOTO_PWD);
-var metadataTool = require("./utility/metadataTool.js");
+// var metadataTool = require("./utility/metadataTool.js");
 var tweetPhoto = require("./utility/twitterTool.js");
 
-var formatName = require("./utility/nameFormatterTool.js");
+var payloadPackager = require("./utility/payloadPackager.js");
 
 function getLatestFile(directory) {
     return new Promise((resolve, reject) => {
@@ -50,43 +50,62 @@ function getLatestFile(directory) {
     });
 }
 
+// KNOWN DUP
+// const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
+
 (async () => {
     try {
-        var loggit = "checkForPreviousPhoto";
-        // const latestFile = await getLatestFile(process.env.PHOTO_PWD);
-        const latestFile = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
-        console.log(loggit, 'Latest file with pathway:', latestFile);
+        var loggit = "processHistoricalTweet";
+        // const latestFileWithPWD = await getLatestFile(process.env.PHOTO_PWD);
+        const latestFileWithPWD = process.env.PHOTO_PWD + "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png";
+        console.log(loggit, 'Latest file with pathway:', latestFileWithPWD);
 
-        const filePWDPieces = latestFile.split("/");
+        const filePWDPieces = latestFileWithPWD.split("/");
         const filename = filePWDPieces[filePWDPieces.length - 1];
         console.log(loggit, 'Latest file:', filename);
 
-        var currentMetadata = await metadataTool.read(latestFile);
+        // var currentMetadata = await metadataTool.read(latestFileWithPWD);
 
-        if (currentMetadata.ImageHistory) {
-            console.log(loggit, "Image already Tweeted as Then And Now, ImageHistory is", currentMetadata.ImageHistory);
-            return
-        }
+        // if (currentMetadata.ImageHistory) {
+        //     console.log(loggit, "Image already Tweeted as Then And Now, ImageHistory is", currentMetadata.ImageHistory);
+        //     return
+        // }
 
         var parts = filename.split('-');
         var index = parts.findIndex(part => part.match(/\d+/));
         var query = parts.slice(0, index).join('-');
 
-        console.log(loggit, "query from file name", query);
+        console.log(loggit, "query portion of file name", query);
 
-        const matchingFiles = await files.filter(file => file.startsWith(query));
+        // const matchingFiles = await files.filter(file => file.startsWith(query));
+        const matchingFiles = [
+            "cloudy-weather-in-zhongwei-china-in-hatching-style-1684111111111.png",
+            "cloudy-weather-in-zhongwei-china-in-hatching-style-1684177513095.png"
+        ]
 
-        if (matchingFiles.length == 1) {
-            console.log(loggit, "No past photos found");
+        if (matchingFiles.length < 2) {
+            console.log(loggit, "No past photos found, Ending Process");
+            process.exit(0);
             return
         };
 
-        var historyPkg = formatName.getHistoryPackageFromFilenames(matchingFiles);
-             
-        await tweetPhoto.postMultiplePhotos(historyPkg);
+        console.log(loggit, "Found", matchingFiles.length, "matching photos, generating history package");
+        var historyPkg = payloadPackager.getHistoryPackageFromFilenames(matchingFiles);
 
-        console.log(matchingFiles);
+        historyPkg.mediaIDs = [];
+        for (fileIndex in historyPkg.filenames) {
+            var historicalFilename = historyPkg.filenames[fileIndex];
+            // var currentMetadata = await metadataTool.read(process.env.PHOTO_PWD + historicalFilename);
+            var currentMetadata = {ImageUniqueID:Date.now()}
+            historyPkg.mediaIDs.push(currentMetadata.ImageUniqueID);
+        }
 
+        console.log(loggit, "Posting Historical Tweet");
+        var tweetID = await tweetPhoto.postHistoricalTweet(historyPkg);
+        console.log(loggit, "Successfully Posted Historical Tweet, adding id", tweetID, "to the metadata");
+
+        // await metadataTool.addHistoricalTweetID(filename, tweetID);
+        console.log(loggit, "Successfully updated metadata");
         console.log(loggit, "Process Done");
         process.exit(0);
     } catch (err) {

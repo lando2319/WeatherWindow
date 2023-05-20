@@ -1,3 +1,4 @@
+
 var grabRandomCity = require('./utility/grabRandomCity.js');
 var grabGooglePlacePhoto = require('./utility/grabGooglePlacePhoto.js');
 var generateOpenAIImage = require('./utility/generateOpenAIImage.js');

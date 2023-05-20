@@ -34,29 +34,32 @@ async function post(filePWD, query) {
     }
 }
 
-async function postMultiplePhotos(historyPkg) {
+async function postHistoricalTweet(historyPkg) {
     try {
 
-        console.log("Posting tweet...")
+        console.log("Posting Historical tweet")
 
-        var msg = "HISTORY " + historyPkg.times.join(" • ") + "\nOpenAI DALL-E AI Generated Photo\n\nQuery: \"" + historyPkg.query + "\"";
+        var msg = "Then And Now: " + historyPkg.dates + "\nOpenAI DALL-E AI Generated Photos\n\nQuery: \"" + historyPkg.query + "\"";
 
+        
         console.log(msg);
-        process.exit(0);
+        console.log(historyPkg.mediaIDs);
+        // process.exit(0);
 
-        // await client.v2.tweet(msg, { 
+        // var { data: createdTweet } = await client.v2.tweet(msg, { 
         //     media: { 
-        //         media_ids: [mediaId] 
+        //         media_ids: historyPkg.mediaIDs 
         //     } 
         // });
 
         // console.log("Successfully Tweeted Photo");
 
-        // return mediaId
+        // return createdTweet.id
+        return "931241241422134"
     } catch (e) {
         throw("tweetPhoto Error " + e)
     }
 }
 
 module.exports.post = post;
-module.exports.postMultiplePhotos = postMultiplePhotos;
+module.exports.postHistoricalTweet = postHistoricalTweet;
