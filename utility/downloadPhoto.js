@@ -9,7 +9,7 @@ async function go(url, name) {
         const arrayBuffer = await blob.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
 
-        var formattedName = formatName.run(name, Date.now());
+        var formattedName = formatName.format(name, Date.now());
         var finalPwd = process.env.PHOTO_PWD + formattedName;
 
         await fs.writeFileSync(finalPwd, buffer);
