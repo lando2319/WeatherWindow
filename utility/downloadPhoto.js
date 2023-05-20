@@ -1,5 +1,5 @@
-require('dotenv').config({ path: __dirname + '/.env' });
-var formatName = require("./utility/formatPhotoName.js");
+require('dotenv').config({ path: __dirname + '/../.env' });
+var formatName = require("./nameFormatterTool.js");
 const fs = require('fs');
 
 async function go(url, name) {

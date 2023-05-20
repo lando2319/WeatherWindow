@@ -1,5 +1,5 @@
-require('dotenv').config({ path: __dirname + '/.env' })
-var getCleanError = require("./utility/errorHandling.js");
+require('dotenv').config({ path: __dirname + '/../.env' })
+var getCleanError = require("./errorHandling.js");
 
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({

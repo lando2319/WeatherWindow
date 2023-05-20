@@ -1,14 +1,14 @@
-var grabRandomCity = require('./grabRandomCity.js');
-var grabGooglePlacePhoto = require('./grabGooglePlacePhoto.js');
-var generateOpenAIImage = require('./generateOpenAIImage.js');
-var grabWeatherForecase = require('./grabWeather.js');
-var populationFormatter = require('./populationFormatter.js');
+var grabRandomCity = require('./utility/grabRandomCity.js');
+var grabGooglePlacePhoto = require('./utility/grabGooglePlacePhoto.js');
+var generateOpenAIImage = require('./utility/generateOpenAIImage.js');
+var grabWeatherForecase = require('./utility/grabWeather.js');
+var populationFormatter = require('./utility/populationFormatter.js');
 var spiceUpMyQuery = require('./utility/spiceUpMyQuery.js');
-var genHTML = require('./genHTML.js');
-var genErrorPage = require('./genErrorPage.js');
-var tokenCheck = require("./tokenCheck.js");
-var downloadPhoto = require("./downloadPhoto.js");
-var tweetPhoto = require("./tweetPhoto.js");
+var genHTML = require('./utility/genHTML.js');
+var genErrorPage = require('./utility/genErrorPage.js');
+var tokenCheck = require("./utility/tokenCheck.js");
+var downloadPhoto = require("./utility/downloadPhoto.js");
+var tweetPhoto = require("./utility/twitterTool.js");
 var metadataTool = require("./utility/metadataTool.js");
 
 var date = new Date();

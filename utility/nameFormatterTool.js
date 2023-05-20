@@ -1,5 +1,5 @@
 
-function run(name, rightNow) {
+function format(name, rightNow) {
     var formattedName = name.toLowerCase() 
     formattedName = formattedName.replace(/ /g, "-") + "-" + rightNow + ".png";
 
@@ -42,5 +42,5 @@ function getHistoryPackageFromFilenames(filenames) {
     }
 };
 
-module.exports.run = run;
+module.exports.format = format;
 module.exports.getHistoryPackageFromFilenames = getHistoryPackageFromFilenames;

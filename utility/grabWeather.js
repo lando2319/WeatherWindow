@@ -1,5 +1,5 @@
 var request = require('request');
-var errorHandling = require('./utility/errorHandling.js');
+var errorHandling = require('./errorHandling.js');
 
 async function grab(lat_log) {
     try {

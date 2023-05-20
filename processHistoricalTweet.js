@@ -2,9 +2,9 @@ require('dotenv').config({path:__dirname+'/.env'});
 const fs = require("fs");
 const files = fs.readdirSync(process.env.PHOTO_PWD);
 var metadataTool = require("./utility/metadataTool.js");
-var tweetPhoto = require("./tweetPhoto.js");
+var tweetPhoto = require("./utility/twitterTool.js");
 
-var formatName = require("./utility/formatPhotoName.js");
+var formatName = require("./utility/nameFormatterTool.js");
 
 function getLatestFile(directory) {
     return new Promise((resolve, reject) => {

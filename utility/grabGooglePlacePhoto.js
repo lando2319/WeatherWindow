@@ -1,7 +1,7 @@
-require('dotenv').config({path:__dirname+'/.env'});
+require('dotenv').config({path:__dirname+'/../.env'});
 var request = require('request');
-var cleanPlaceQuery = require('./utility/packageQuery.js');
-var errorHandling = require('./utility/errorHandling.js');
+var cleanPlaceQuery = require('./packageQuery.js');
+var errorHandling = require('./errorHandling.js');
 
 async function grab(place) {
     try {
