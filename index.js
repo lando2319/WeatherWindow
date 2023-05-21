@@ -29,7 +29,7 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
 // EXPERIMENTAL
 // 0 is no spice
 // 10 is pure spice
-var spiceRating = 5;
+var spiceRating = 3;
 
 
 

@@ -15,7 +15,7 @@ async function gen(err) {
         </html>
         `;
 
-        await fs.promises.writeFile(__dirname+'/home.html', html);
+        await fs.promises.writeFile(__dirname+'/../home.html', html);
         console.log("Successfully Generated Error Page at home.html");
         process.exit(0);
     } catch (err) {
