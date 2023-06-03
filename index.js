@@ -7,7 +7,6 @@ var populationFormatter = require('./utility/populationFormatter.js');
 var spiceUpMyQuery = require('./utility/spiceUpMyQuery.js');
 var genHTML = require('./utility/genHTML.js');
 var genErrorPage = require('./utility/genErrorPage.js');
-var tokenCheck = require("./utility/tokenCheck.js");
 var downloadPhoto = require("./utility/downloadPhoto.js");
 var tweetPhoto = require("./utility/twitterTool.js");
 var metadataTool = require("./utility/metadataTool.js");
@@ -46,49 +45,68 @@ var spiceRating = 3;
         console.log(" POPULATION:", pkg.rawPopulation, "(" + pkg.population + ")");
         console.log(" LATITUDE, LOGITUDE:", pkg.lat_log);
 
-        var tokenCheckPkg = tokenCheck.check();
-        if (tokenCheckPkg.msg) {
-            console.log("\nWARNING:", tokenCheckPkg.msg)
-        } 
-
         const randomNum = Math.floor(Math.random() * 2);
         console.log("Random Number is", randomNum);
 
         var weatherSummary = "";
-        if (!tokenCheckPkg.missingTokens.includes("weather") && randomNum != 0) {
+        if (randomNum != 0) {
             weatherSummary = await grabWeatherForecase.grab(pkg.lat_log);
         }
 
-        if (randomNum == 0 && !tokenCheckPkg.missingTokens.includes("places")) {
+        if (randomNum == 0) {
             pkg.source = "Google Places";
             pkg.query = pkg.place;
             console.log("Querying Google Places For Photo of", pkg.query);
             pkg.photoURL = await grabGooglePlacePhoto.grab(pkg.query);
-        } else if (!tokenCheckPkg.missingTokens.includes("openai")) {
+        } else {
             pkg.source = "OpenAI DALL-E";
             pkg.query = weatherSummary + " weather in " + pkg.place;
 
-            // EXPERIMENTAL
-            // Producting strange results
-            pkg.query = spiceUpMyQuery.spiceThis(pkg.query, spiceRating);
+            var spice = spiceUpMyQuery.spiceThis(pkg.query, spiceRating);
+            
+            if (spice) {
+                pkg.query = pkg.query + " " + spice;
+            }
+
+            var unixTimeStamp = Date.now();
+
+            var dbDoc = {
+                query:pkg.query,
+                weather:weatherSummary,
+                imageSource:"OpenAI",
+                storageDriveID:"76E8-CACF",
+                spice:spice,
+                model:"Dall-E",
+                unixTimeStamp:unixTimeStamp,
+                city: pkg.city,
+                country:pkg.country,
+                twitterMediaID:"",
+                tweetID:""
+            };
+
 
             console.log("Querying OpenAI For Photo of", pkg.query);
             console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
             pkg.photoURL = await generateOpenAIImage.grab(pkg.query);
 
+            dbDoc.originalURL = pkg.photoURL;
+
             console.log("Downloading Photo");
-            var photoPWD = await downloadPhoto.go(pkg.photoURL, pkg.query);
-            console.log("Photo Downloaded Successfully to", photoPWD);
+            
+            // LEFT OFF HERE
+            // THis needs to return JUST the file name, just use the PWD env in the twitter thing
+            var fileName = await downloadPhoto.go(pkg.photoURL, pkg.query, unixTimeStamp);
+            console.log("Photo Downloaded Successfully to", fileName);
 
-            if (!tokenCheckPkg.missingTokens.includes("twitter")) {
-                console.log("Posting Photo To Twitter");
-                var mediaID = await tweetPhoto.post(photoPWD, pkg.query);
-                console.log("Successfully Posted To Twitter");
+            console.log("Posting Photo To Twitter");
+            var tweetPkg = await tweetPhoto.post(fileName, pkg.query);
+            console.log("Successfully Posted To Twitter");
 
-                console.log("Adding MediaID", mediaID);
-                await metadataTool.addMediaID(photoPWD, mediaID);
-                console.log("Successfully added Media id", mediaID);
-            }
+            dbDoc.twitterMediaID = tweetPkg.mediaID;
+            dbDoc.tweetID = tweetPkg.tweetID;
+
+            await db.collection("weatherwindow").doc(fileName).set(dbDoc);
+            console.log("Successfully Set Firebase Doc");
         }
 
         if (pkg.photoURL) {

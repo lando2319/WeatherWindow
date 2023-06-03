@@ -16,13 +16,11 @@ function spiceThis(query, spiceRating) {
         console.log("Serving Spicy Query");
         const randomNum = Math.floor(Math.random() * spices.length);
 
-        var spice = spices[randomNum];
-
-        return query + " " + spice;
+        return spices[randomNum];
     }
 
 
-    return query
+    return ""
 }
 
 module.exports.spiceThis = spiceThis

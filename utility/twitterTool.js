@@ -12,23 +12,27 @@ if (process.env.TWITTER_CONSUMER_KEY) {
     });
 }
 
-async function post(filePWD, query) {
+async function post(fileName, query) {
     try {
         console.log("Posting tweet...")
 
-        const mediaId = await client.v1.uploadMedia(filePWD)
+        const mediaId = await client.v1.uploadMedia(process.env.PHOTO_PWD + fileName)
 
         var msg = "OpenAI DALL-E AI Generated Photo\n\nQuery: \"" + query + "\"";
 
-        await client.v2.tweet(msg, { 
+        var { data: createdTweet } = await client.v2.tweet(msg, { 
             media: { 
                 media_ids: [mediaId] 
             } 
         });
 
-        console.log("Successfully Tweeted Photo");
+        console.log("Successfully Tweeted Photo", createdTweet.id);
 
-        return mediaId
+        return {
+            mediaID:mediaId,
+            tweetID:createdTweet.id
+        }
+
     } catch (e) {
         throw("post Error " + e)
     }
