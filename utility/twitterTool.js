@@ -18,6 +18,8 @@ async function post(fileName, query) {
 
         const mediaId = await client.v1.uploadMedia(process.env.PHOTO_PWD + fileName)
 
+        console.log("Twitter Media ID", mediaId);
+
         var msg = "OpenAI DALL-E AI Generated Photo\n\nQuery: \"" + query + "\"";
 
         var { data: createdTweet } = await client.v2.tweet(msg, { 

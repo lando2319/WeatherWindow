@@ -9,7 +9,17 @@ var genHTML = require('./utility/genHTML.js');
 var genErrorPage = require('./utility/genErrorPage.js');
 var downloadPhoto = require("./utility/downloadPhoto.js");
 var tweetPhoto = require("./utility/twitterTool.js");
-var metadataTool = require("./utility/metadataTool.js");
+
+const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
+const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
+
+const serviceAccount = require('./config/' + process.env.SERVICE_FILE_NAME);
+
+initializeApp({
+    credential: cert(serviceAccount)
+});
+
+const db = getFirestore();
 
 var date = new Date();
 var prettyDate = date.toLocaleDateString('en-US', {
@@ -77,7 +87,7 @@ var spiceRating = 3;
                 storageDriveID:"76E8-CACF",
                 spice:spice,
                 model:"Dall-E",
-                unixTimeStamp:unixTimeStamp,
+                unixTimeStamp:unixTimeStamp.toString(),
                 city: pkg.city,
                 country:pkg.country,
                 twitterMediaID:"",
@@ -93,8 +103,6 @@ var spiceRating = 3;
 
             console.log("Downloading Photo");
             
-            // LEFT OFF HERE
-            // THis needs to return JUST the file name, just use the PWD env in the twitter thing
             var fileName = await downloadPhoto.go(pkg.photoURL, pkg.query, unixTimeStamp);
             console.log("Photo Downloaded Successfully to", fileName);
 

@@ -10,7 +10,7 @@ const serviceAccount = require('../config/' + process.env.SERVICE_FILE_NAME);
 
 const fs = require('fs');
 
-const documentsPath = `/Users/mikeland/Desktop/mockDB`;
+const documentsPath = `/media/lando2319/76E8-CACF`;
 
 // console.log(process.env.SERVICE_FILE_NAME);
 
@@ -26,6 +26,8 @@ const db = getFirestore();
 
         for (fileIndex in files) {
             var file = files[fileIndex];
+            console.log("Starting with", file);
+            
             // var file = "cloudy-weather-in-paris-france-in-black-and-white-1683684313857.png"
             var metadata = await metadataTool.read(documentsPath + "/" + file);
 
@@ -61,8 +63,8 @@ const db = getFirestore();
                 spice = "in hatching style";
             }
 
-            if (country.includes("-in-splottchy-style")) {
-                country = country.replace("-in-splottchy-style", "");
+            if (country.includes("-splottchy-style")) {
+                country = country.replace("-splottchy-style", "");
                 spice = "in splottchy style";
             }
 
@@ -79,6 +81,10 @@ const db = getFirestore();
 
             var countryFirstLetter = country.charAt(0);
             var countryInitialCaps = countryFirstLetter.toUpperCase() + country.slice(1);
+
+            if (countryInitialCaps == "United-states") {
+                countryInitialCaps = "United States";
+            };
 
             var query = weatherInitialCaps + " weather in " + cityInitialCaps + " " + countryInitialCaps + " " + spice;
 
@@ -101,18 +107,18 @@ const db = getFirestore();
             // console.log("STATE");
             console.log("COUNTRY", countryInitialCaps);
 
-            await db.collection("weatherwindow").doc(file).set({
-                query:query,
-                imageSource:source,
-                storageDriveID:"76E8-CACF",
-                spice:spice,
-                model:model,
-                unixTimeStamp:unixTimeStamp,
-                twitterMediaID:metadata.ImageUniqueID,
-                tweetID:"backfill",
-                city:cityInitialCaps,
-                country:countryInitialCaps,
-            })
+            // await db.collection("weatherwindow").doc(file).set({
+            //     query:query.trim(),
+            //     imageSource:source,
+            //     storageDriveID:"76E8-CACF",
+            //     spice:spice,
+            //     model:model,
+            //     unixTimeStamp:unixTimeStamp,
+            //     twitterMediaID:metadata.ImageUniqueID || "",
+            //     tweetID:"backfill",
+            //     city:cityInitialCaps,
+            //     country:countryInitialCaps,
+            // })
         }
 
         // MANUALLY READ THE TWO, one orgainic and one I did the testing on

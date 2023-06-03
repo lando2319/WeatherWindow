@@ -16,7 +16,7 @@ async function go(url, name, unixTimeStamp) {
 
         console.log("Photo", finalPwd, "successfully created");
 
-        return finalPwd
+        return formattedName
     } catch (err) {
         console.log("Error on downloadPhoto", err);
         process.exit(1);
