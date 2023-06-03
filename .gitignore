@@ -7,3 +7,6 @@ tester.js
 tester2.js
 home.html
 .vscode/
+
+config/*
+!/config/.gitkeep
