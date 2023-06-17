@@ -62,7 +62,7 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             createdAt:FieldValue.serverTimestamp()
         };
 
-        console.log(dbDoc);
+        // console.log(dbDoc);
         await db.collection("WeatherWindowQueries").doc(unixTimeStamp.toString()).set(dbDoc);
 
         console.log("Successfully Set Firebase Doc");

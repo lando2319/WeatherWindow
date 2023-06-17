@@ -52,18 +52,7 @@ async function postAIImages(aiImagePkgs, query) {
 
         for (index in aiImagePkgs) {
             var aiImagePkg = aiImagePkgs[index];
-
-
-
-
-
-            // UPDATE THIS pwd-to-ext
-
-
-
-
-
-            const mediaId = await client.v1.uploadMedia("/pwd-to-ext/" + aiImagePkg.storageDriveID + "/" + fileName);
+            const mediaId = await client.v1.uploadMedia(process.env.EXT_DRIVE_PWD + aiImagePkg.storageDriveID + "/" + aiImagePkg.id);
             mediaIDs.push(mediaId);
             console.log(aiImagePkg.imageSource, "Twitter Media ID", mediaId);
             imageSourceNames.push(aiImagePkg.imageSource + " " + aiImagePkg.model)

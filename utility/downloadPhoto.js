@@ -10,7 +10,7 @@ async function go(url, name, unixTimeStamp) {
         const buffer = Buffer.from(arrayBuffer);
 
         var formattedName = formatName.format(name, unixTimeStamp);
-        var finalPwd = process.env.PHOTO_PWD + formattedName;
+        var finalPwd = "/Volumes/76E8-CACF/" + formattedName;
 
         await fs.writeFileSync(finalPwd, buffer);
 

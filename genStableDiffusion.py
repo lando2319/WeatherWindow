@@ -10,7 +10,7 @@ import time
 
 from diffusers import DiffusionPipeline
 
-pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
+pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1")
 pipe = pipe.to("mps")
 
 pipe.enable_attention_slicing()
@@ -26,6 +26,8 @@ cred = credentials.Certificate('./config/' + os.getenv("SERVICE_FILE_NAME"))
 app = firebase_admin.initialize_app(cred)
 
 db = firestore_async.client()
+
+steps = 200
 
 async def get_pending_docs():
     docs = db.collection("WeatherWindowQueries").where("stableDiffusionImage", "==", "PENDING").stream()
@@ -44,10 +46,9 @@ async def get_pending_docs():
 
         fileName = formatName(queryDoc['query'], timestamp)
 
-        image = pipe(queryDoc['query']).images[0]
+        image = pipe(queryDoc['query'], num_inference_steps=steps).images[0]
 
-        # UPDATE WITH FULL PWD
-        filepwd = "/" + fileName
+        filepwd = "/Volumes/SD_Drive/" + fileName
 
         image.save(filepwd)
 
@@ -60,7 +61,7 @@ async def get_pending_docs():
             "originalURL":"",
             "query":queryDoc['query'],
             "spice":queryDoc['spice'],
-            "storageDriveID":"NEW DRIVE ID",
+            "storageDriveID":"SD_Drive",
             "tweetID":"",
             "twitterMediaID":"",
             "unixTimeStamp":timestamp,
@@ -81,7 +82,7 @@ async def get_pending_docs():
 
 def formatName(name, rightNow):
   formattedName = name.lower()
-  formattedName = formattedName.replace(" ", "-") + "-" + rightNow + ".png"
+  formattedName = formattedName.replace(" ", "-") + "-" + rightNow + ".jpg"
 
   return formattedName
 
