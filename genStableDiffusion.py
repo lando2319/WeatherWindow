@@ -8,6 +8,13 @@ import asyncio
 import os
 import time
 
+from diffusers import DiffusionPipeline
+
+pipe = DiffusionPipeline.from_pretrained("runwayml/stable-diffusion-v1-5")
+pipe = pipe.to("mps")
+
+pipe.enable_attention_slicing()
+
 timestamp = str(time.time_ns() // 1000000)
 
 load_dotenv()
@@ -35,9 +42,14 @@ async def get_pending_docs():
         await db.collection("WeatherWindowQueries").document(queryID).update({"stableDiffusionImage":"PROCESSING"})
         print("Successfully set genStableDIffusion to PROCESSING")
 
-        # ADD STABLE DIFFUSION PROCESS
-
         fileName = formatName(queryDoc['query'], timestamp)
+
+        image = pipe(queryDoc['query']).images[0]
+
+        # UPDATE WITH FULL PWD
+        filepwd = "/" + fileName
+
+        image.save(filepwd)
 
         print("Setting new File Record in firestore")
         await db.collection("weatherwindow").document(fileName).set({
