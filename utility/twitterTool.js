@@ -40,6 +40,58 @@ async function post(fileName, query) {
     }
 }
 
+
+async function postAIImages(aiImagePkgs, query) {
+    try {
+        console.log("Posting tweet...")
+        var msg = "";
+
+        var imageSourceNames = [];
+        var mediaIDs = [];
+        var savePkgs = {};
+
+        for (index in aiImagePkgs) {
+            var aiImagePkg = aiImagePkgs[index];
+
+
+
+
+
+            // UPDATE THIS pwd-to-ext
+
+
+
+
+
+            const mediaId = await client.v1.uploadMedia("/pwd-to-ext/" + aiImagePkg.storageDriveID + "/" + fileName);
+            mediaIDs.push(mediaId);
+            console.log(aiImagePkg.imageSource, "Twitter Media ID", mediaId);
+            imageSourceNames.push(aiImagePkg.imageSource + " " + aiImagePkg.model)
+            savePkgs[aiImagePkg.id] = {
+                id: aiImagePkg.id,
+                savePkg:{
+                    twitterMediaID:mediaId
+                }
+            }
+        }
+
+        var msg = "AI Generated Photos " + imageSourceNames.join(" | ") + "\n\nPrompt: \"" + query + "\"";
+        var { data: createdTweet } = await client.v2.tweet(msg, { 
+            media: { 
+                media_ids: mediaIDs
+            } 
+        });
+
+        aiImagePkgs.forEach(aiImagePkg => {
+            savePkgs[aiImagePkg.id].savePkg.tweetID = createdTweet.id;
+        })
+        
+        return savePkgs
+    } catch (e) {
+        throw("post Error " + e)
+    }
+}
+
 async function postHistoricalTweet(historyPkg) {
     try {
 
@@ -59,3 +111,4 @@ async function postHistoricalTweet(historyPkg) {
 
 module.exports.post = post;
 module.exports.postHistoricalTweet = postHistoricalTweet;
+module.exports.postAIImages = postAIImages;
