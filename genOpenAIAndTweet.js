@@ -7,7 +7,7 @@ var tweetPhoto = require("./utility/twitterTool.js");
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
-const serviceAccount = require('./config/' + process.env.SERVICE_FILE_NAME);
+const serviceAccount = require('/Users/mikeland/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME);
 
 initializeApp({
     credential: cert(serviceAccount)

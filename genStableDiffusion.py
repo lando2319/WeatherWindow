@@ -21,7 +21,7 @@ load_dotenv()
 
 print("initializing firebase")
 
-cred = credentials.Certificate('./config/' + os.getenv("SERVICE_FILE_NAME"))
+cred = credentials.Certificate('/Users/mikeland/WeatherWindow/config/' + os.getenv("SERVICE_FILE_NAME"))
 
 app = firebase_admin.initialize_app(cred)
 
