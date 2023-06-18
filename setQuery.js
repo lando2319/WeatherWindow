@@ -59,7 +59,8 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             country: pkg.country,
             openAIImage: "QUEUED",
             stableDiffusionImage: "PENDING",
-            createdAt:FieldValue.serverTimestamp()
+            createdAt:FieldValue.serverTimestamp(),
+            status:"PROCESSING"
         };
 
         // console.log(dbDoc);
