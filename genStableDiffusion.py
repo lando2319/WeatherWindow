@@ -10,6 +10,10 @@ import time
 
 from diffusers import DiffusionPipeline
 
+from diffusers.utils import logging
+
+logging.disable_progress_bar()
+
 pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1")
 pipe = pipe.to("mps")
 
