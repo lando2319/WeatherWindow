@@ -102,7 +102,7 @@ console.log("========================\n\nStarting WeatherWindow Process", pretty
         }
 
         console.log("Updating WeatherWindowQueries Firestore Doc");
-        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName});
+        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName, status:"COMPLETE"});
         console.log("Successfully Updated WeatherWindowQueries Firestore Doc");
 
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
