@@ -10,13 +10,10 @@ import time
 
 from diffusers import DiffusionPipeline
 
-from diffusers.utils import logging
-
-logging.disable_progress_bar()
-
 pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1")
 pipe = pipe.to("mps")
 
+pipe.set_progress_bar_config(disable=True)
 pipe.enable_attention_slicing()
 
 timestamp = str(time.time_ns() // 1000000)
@@ -45,8 +42,8 @@ async def get_pending_docs():
 
     if queryDoc != "":
         print(f"Proceeding with query {queryID} {queryDoc['query']}")
-        await db.collection("WeatherWindowQueries").document(queryID).update({"stableDiffusionImage":"PROCESSING"})
-        print("Successfully set genStableDIffusion to PROCESSING")
+        # await db.collection("WeatherWindowQueries").document(queryID).update({"stableDiffusionImage":"PROCESSING"})
+        # print("Successfully set genStableDIffusion to PROCESSING")
 
         fileName = formatName(queryDoc['query'], timestamp)
 

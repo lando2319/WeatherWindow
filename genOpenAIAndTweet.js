@@ -24,7 +24,7 @@ var prettyDate = date.toLocaleDateString('en-US', {
     minute: 'numeric'
 });
 
-console.log("========================\n\nStarting WeatherWindow Process", prettyDate, "\n");
+console.log("========================\n\nStarting WeatherWindow genOpenAIAndTweet Process", prettyDate, "\n");
 
 (async () => {
     try {
