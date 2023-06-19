@@ -31,6 +31,14 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
 
 (async () => {
     try {
+        console.log("Checking For Queries Stuck In Processing");
+        var stuckQueries = await db.collection("WeatherWindowQueries").where("status", "==", "PROCESSING").get();
+
+        if (stuckQueries.docs.length > 0) {
+            console.log("Records found stuck in PROCESSING, ending process");
+            process.exit(0);
+        };
+
         var pkg = grabRandomCity.grab();
         pkg.place = pkg.city + " " + pkg.country;
         pkg.population = populationFormatter.prettyPop(pkg.rawPopulation)
