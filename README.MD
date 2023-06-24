@@ -7,14 +7,16 @@ This code is powering the [Weather Window AI Twitter Account](https://twitter.co
 This code will
 
 - pick a random city
-- provide a link to a photo of the random city, EITHER (50/50 chance)
-    - a Google Places Photo
-    - an AI Generate Photo of the Current Weather along with the random city, Ex. "Stormy weather in Chicago USA"
+- query for the weather
+- save the query in firebase
+- Python Stable Diffusion file grabs the PENDING query
+- Generates Stable Diffusion Image
+- When done it will update a field on the query doc openAIImage as PENDING
+- Next the getOpenAIAndTweet file grabs the PENDING query
+- Generates OpenAI Image
+- Upload and Tweets both images
 
-- If it's an OpenAI Image, it'll save the image
-- Generate an HTML Page
-- Tweet the photo to the fans
-- Opens the HTML Page on my E Paper device
+There are also files for casting the new images to a eink display
 
 [See Blog Post For More](https://mikepland.com/portfolio/dall-e/2023/05/13/Weather-Window-AI/)
 
@@ -26,17 +28,22 @@ Clone Repo
 cd into repo
 
 run `npm i`
-
 run the command `mv .envExample .env`
-
 add env vars as needed to `.env`
 
-`node index.js` will run the program
+also
+
+run `pip install -r requirements.txt`
+
+Main Files:
+`node setQuery.js` will set the new query
+`python genStableDiffusion.py` will generate the stable diffusion based on the query
+`node genOpenAIAndTweet.js` will generate the openAI image and tweet
 
 # More
 Hours of Operation (14.5 Hours a day)
 - 4AM - 2PM
-- 4:30PM - 10PM
+- 4PM - 10PM
 
 
 Cities Data list from:
