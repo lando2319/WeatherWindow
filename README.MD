@@ -41,7 +41,7 @@ Main Files:
 - `node genOpenAIAndTweet.js` will generate the openAI image and tweet
 
 # More
-Hours of Operation (14.5 Hours a day)
+Hours of Operation
 - 4AM - 2PM
 - 4PM - 10PM
 
