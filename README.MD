@@ -36,9 +36,9 @@ also
 run `pip install -r requirements.txt`
 
 Main Files:
-`node setQuery.js` will set the new query
-`python genStableDiffusion.py` will generate the stable diffusion based on the query
-`node genOpenAIAndTweet.js` will generate the openAI image and tweet
+- `node setQuery.js` will set the new query
+- `python genStableDiffusion.py` will generate the stable diffusion based on the query
+- `node genOpenAIAndTweet.js` will generate the openAI image and tweet
 
 # More
 Hours of Operation (14.5 Hours a day)

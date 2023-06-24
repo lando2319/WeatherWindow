@@ -10,7 +10,7 @@ pipe.enable_attention_slicing()
 
 print("Starting Process")
 
-steps = 20
+steps = 200
 query = "Stormy Weather in Monte Carlo"
 
 image = pipe(query, num_inference_steps=steps).images[0]
