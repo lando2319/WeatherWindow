@@ -2,6 +2,7 @@
 var generateOpenAIImage = require('./utility/generateOpenAIImage.js');
 var genErrorPage = require('./utility/genErrorPage.js');
 var downloadPhoto = require("./utility/downloadPhoto.js");
+var genHTML = require('./utility/genHTML.js');
 var tweetPhoto = require("./utility/twitterTool.js");
 
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
@@ -104,6 +105,12 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         console.log("Updating WeatherWindowQueries Firestore Doc");
         await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName, status:"COMPLETE"});
         console.log("Successfully Updated WeatherWindowQueries Firestore Doc");
+
+        console.log("Creating Stable Diffusion HTML Page for Weather Window Actual");
+        queryPkg.source = "Stable Diffusion";
+        queryPkg.photoPWD = "/Volumes/SD_Drive/" + queryPkg.stableDiffusionImage;
+        await genHTML.gen(queryPkg);
+        console.log("Successfully Created HTML Page for Weather Window Actual");
 
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
         process.exit(0);

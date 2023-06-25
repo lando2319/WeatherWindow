@@ -12,8 +12,8 @@ async function gen(pkg) {
             <link rel="stylesheet" type="text/css" href="style.css">
             <body>
                 <div class="container" >
-                    <img src=${pkg.photoURL} >
-                    <h2>${pkg.place} - ${pkg.population} - ${pkg.source} Query: "${pkg.query}"</h2>
+                    <img src=${pkg.photoPWD} >
+                    <h2>${pkg.city} ${pkg.country} - ${pkg.source} Prompt: "${pkg.query}"</h2>
                 </div>
             </body>
         </html>
