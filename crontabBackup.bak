@@ -1,0 +1,26 @@
+
+# Full screen is not working
+# I suspect it's because it's sudo
+# I tried just crontab instead of sudo crontab but that wasn't calling the jobs
+# --start-fullscreen DOES work locally with 
+# `open -a "Google Chrome" --start-fullscreen home.html`
+
+# Weather Window
+00 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/setQuery.js >> /tmp/WeatherWindow.log 2>&1
+
+01 4-14,16-21 * * * source /Users/mikeland/WeatherWindow/venv/bin/activate && /Users/mikeland/WeatherWindow/venv/bin/python3 /Users/mikeland/WeatherWindow/genStableDiffusion.py >> /tmp/WeatherWindow.log 2>&1
+
+13,20 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIAndTweet.js && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --start-fullscreen /Users/mikeland/WeatherWindow/home.html >> /tmp/WeatherWindow.log 2>&1
+
+43 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIHTMLPage.js && /Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --start-fullscreen /Users/mikeland/WeatherWindow/home.html >> /tmp/WeatherWindow.log 2>&1
+
+12 4 * * * /bin/bash /Users/mikeland/WeatherWindow/killChrome.sh >> /tmp/WeatherWindow.log 2>&1
+
+# HN Vimmy Bot
+30 * * * * /usr/local/bin/node /Users/mikeland/HN_Vimmy_Bot/index.js >> /tmp/HN_Vimmy_Bot.log 2>&1
+
+# HN Kotlin Bot
+45 * * * * /usr/local/bin/node /Users/mikeland/HN_Vimmy_Bot/index.js kotlin >> /tmp/HN_Kotlin_Bot.log 2>&1
+
+# Clear Logs
+0 23 * * SUN /bin/bash /Users/mikeland/removeLogFiles.sh >> /tmp/WeatherWindow.log 2>&1
