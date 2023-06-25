@@ -36,8 +36,8 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
             queryPkg.id = queryDoc.id;
         })
 
-        if (!queryPkg) {
-            console.log("No PENDING queries found");
+        if (!queryPkg || queryPkg.status != "COMPLETE") {
+            console.log("No OpenAIImage is ready to be shown");
             process.exit(0);
         }
 
