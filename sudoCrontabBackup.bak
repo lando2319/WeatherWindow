@@ -1,9 +1,5 @@
 
-# Full screen is not working
-# I suspect it's because it's sudo
-# I tried just crontab instead of sudo crontab but that wasn't calling the jobs
-# --start-fullscreen DOES work locally with 
-# `open -a "Google Chrome" --start-fullscreen home.html`
+# user crontab at `crontab -e` is handling opening the screen, here, `sudo crontab -e` is handling everything else
 
 # Weather Window
 00 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/setQuery.js >> /tmp/WeatherWindow.log 2>&1
@@ -13,8 +9,6 @@
 13,20 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIAndTweet.js >> /tmp/WeatherWindow.log 2>&1
 
 43 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIHTMLPage.js >> /tmp/WeatherWindow.log 2>&1
-
-# 12 4 * * * /bin/bash /Users/mikeland/WeatherWindow/killChrome.sh >> /tmp/WeatherWindow.log 2>&1
 
 # HN Vimmy Bot
 30 * * * * /usr/local/bin/node /Users/mikeland/HN_Vimmy_Bot/index.js >> /tmp/HN_Vimmy_Bot.log 2>&1
