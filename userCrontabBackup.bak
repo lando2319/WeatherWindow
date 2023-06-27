@@ -1,0 +1,9 @@
+# also see `sudo crontab -e`
+
+# In order to get the full screen to work
+# crontab is doing screen opening while `sudo crontab` is doing everything else
+# I could move everything from sudo crontab to crontab is I wanted
+# I'd have to adjust some pathways
+14,44 4-14,16-21 * * * open -a "Google Chrome" --args --start-fullscreen /Users/mikeland/WeatherWindow/home.html >> /Users/mikeland/WeatherWindow.log 2>&1
+
+12 4 * * * /bin/bash /Users/mikeland/WeatherWindow/killChrome.sh >> /Users/mikeland/WeatherWindow.log 2>&1

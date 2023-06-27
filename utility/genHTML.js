@@ -13,7 +13,7 @@ async function gen(pkg) {
             <body>
                 <div class="container" >
                     <img src=${pkg.photoPWD} >
-                    <h2>${pkg.source} Prompt: "${pkg.query}"</h2>
+                    <h1>${pkg.source} Prompt: "${pkg.query}"</h1>
                 </div>
             </body>
         </html>
