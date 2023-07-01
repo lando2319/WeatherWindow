@@ -25,6 +25,13 @@ var prettyDate = date.toLocaleDateString('en-US', {
     minute: 'numeric'
 });
 
+var topOfHourDateTime = date.toLocaleDateString('en-US', {
+    year: "numeric",
+    month: 'long',
+    day: 'numeric',
+    hour: 'numeric'
+});
+
 var spiceRating = 3;
 
 console.log("========================\n\nStarting WeatherWindow Set Query Process", prettyDate, "\n");
@@ -38,7 +45,27 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             console.log("Records found stuck in PROCESSING, ending process");
             process.exit(0);
         };
+        console.log("No Records found stuck in PROCESSING");
 
+        console.log("Checking For Queries Already Created This Hour");
+        var latestDocs = await db.collection("WeatherWindowQueries").orderBy("createdAt", "desc").limit(1).get();
+
+        latestDocs.docs.forEach(doc => {
+            var createdAtDate = doc.data().createdAt.toDate();
+            var topOfHourCreatedAtDate = createdAtDate.toLocaleDateString('en-US', {
+                year: "numeric",
+                month: 'long',
+                day: 'numeric',
+                hour: 'numeric'
+            });
+
+            if (topOfHourCreatedAtDate == topOfHourDateTime) {
+                console.log("Already Processed this hour, ending process");
+                process.exit(0);
+            }
+        })
+        
+        console.log("First time processing this hour, continuing process");
         var pkg = grabRandomCity.grab();
         pkg.place = pkg.city + " " + pkg.country;
         pkg.population = populationFormatter.prettyPop(pkg.rawPopulation)
