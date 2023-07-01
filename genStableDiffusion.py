@@ -42,8 +42,8 @@ async def get_pending_docs():
 
     if queryDoc != "":
         print(f"Proceeding with query {queryID} {queryDoc['query']}")
-        # await db.collection("WeatherWindowQueries").document(queryID).update({"stableDiffusionImage":"PROCESSING"})
-        # print("Successfully set genStableDIffusion to PROCESSING")
+        await db.collection("WeatherWindowQueries").document(queryID).update({"stableDiffusionImage":"PROCESSING"})
+        print("Successfully set genStableDIffusion to PROCESSING")
 
         fileName = formatName(queryDoc['query'], timestamp)
 
