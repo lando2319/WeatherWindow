@@ -92,10 +92,12 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             weather: weatherSummary,
             city: pkg.city,
             country: pkg.country,
-            openAIImage: "QUEUED",
+            openAIImage: "PENDING",
             stableDiffusionImage: "PENDING",
             createdAt:FieldValue.serverTimestamp(),
-            status:"PROCESSING"
+            status:"PROCESSING",
+            tweetStatus:"PENDING",
+            midjourneyImage:"PENDING"
         };
 
         // console.log(dbDoc);
