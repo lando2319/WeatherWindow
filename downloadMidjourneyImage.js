@@ -83,7 +83,9 @@ var channelID = "1125566730761154564";
                 midjourneyImageID:messages.first().attachments.first()
             };
             
-            var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp);
+            var basePWD = "/Users/mikeland/OpenAIImages/";
+            
+            var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, basePWD);
             console.log("Photo Downloaded Successfully to", fileName);
 
             console.log("Setting new Image Doc");

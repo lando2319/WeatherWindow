@@ -2,7 +2,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 var formatName = require("./nameFormatterTool.js");
 const fs = require('fs');
 
-async function go(url, name, unixTimeStamp) {
+async function go(url, name, unixTimeStamp, basePWD) {
     try {
         const response = await fetch(url);
         const blob = await response.blob();
@@ -10,9 +10,9 @@ async function go(url, name, unixTimeStamp) {
         const buffer = Buffer.from(arrayBuffer);
 
         var formattedName = formatName.format(name, unixTimeStamp);
-        var finalPwd = "/Volumes/76E8-CACF/" + formattedName;
+        var finalPwd = basePWD + formattedName;
 
-        await fs.writeFileSync(finalPwd, buffer);
+        fs.writeFileSync(finalPwd, buffer);
 
         console.log("Photo", finalPwd, "successfully created");
 

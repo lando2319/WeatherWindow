@@ -76,41 +76,12 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         dbDoc.originalURL = photoURL;
 
         console.log("Downloading Photo");
-        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp);
+        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/76E8-CACF/");
         console.log("Photo Downloaded Successfully to", fileName);
 
         console.log("Setting new Image Doc");
         await db.collection("weatherwindow").doc(fileName).set(dbDoc);
         console.log("Successfully Setting new Image Doc");
-
-        dbDoc.id = fileName;
-
-        console.log("Posting Photos To Twitter");
-
-        var aiImagePkgs = [
-            sdImagePkg,
-            dbDoc
-        ];
-
-        var savePkgs = await tweetPhoto.postAIImages(aiImagePkgs, queryPkg.query);
-        console.log("Successfully Posted To Twitter");
-
-        for (savePkgIndex in savePkgs) {
-            var savePkg = savePkgs[savePkgIndex];
-            console.log("Updating Firestore Doc");
-            await db.collection("weatherwindow").doc(savePkg.id).update(savePkg.savePkg);
-            console.log("Successfully Updated Firestore Doc");
-        }
-
-        console.log("Updating WeatherWindowQueries Firestore Doc");
-        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName, status:"COMPLETE"});
-        console.log("Successfully Updated WeatherWindowQueries Firestore Doc");
-
-        console.log("Creating Stable Diffusion HTML Page for Weather Window Actual");
-        queryPkg.source = "Stable Diffusion";
-        queryPkg.photoPWD = "/Volumes/SD_Drive/" + queryPkg.stableDiffusionImage;
-        await genHTML.gen(queryPkg);
-        console.log("Successfully Created HTML Page for Weather Window Actual");
 
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
         process.exit(0);
