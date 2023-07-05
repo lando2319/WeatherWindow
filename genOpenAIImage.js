@@ -76,7 +76,7 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         dbDoc.originalURL = photoURL;
 
         console.log("Downloading Photo");
-        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/76E8-CACF/");
+        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Users/mikeland/openAIImages/");
         console.log("Photo Downloaded Successfully to", fileName);
 
         console.log("Setting new Image Doc");
