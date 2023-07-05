@@ -102,7 +102,10 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
         }
 
         console.log("Updating WeatherWindowQueries Firestore Doc");
-        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({tweetStatus:"COMPLETE"});
+        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({
+            tweetStatus:"COMPLETE",
+            status:"COMPLETE"
+        });
         console.log("Successfully Updated WeatherWindowQueries Firestore Doc");
 
         console.log("\n\nEnding WeatherWindow tweetImages Process ========================");

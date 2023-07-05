@@ -83,6 +83,10 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         await db.collection("weatherwindow").doc(fileName).set(dbDoc);
         console.log("Successfully Setting new Image Doc");
 
+        console.log("Setting new Query Doc");
+        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName});
+        console.log("Successfully Setting OpenAIImage on Query Doc as filename");
+
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
         process.exit(0);
     } catch (err) {
