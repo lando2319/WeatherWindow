@@ -30,7 +30,7 @@ var channelID = "1125566730761154564";
 (async () => {
     try {
         var queryPkg;
-        var pendingQueries = await db.collection("WeatherWindowQueries").where("midjourneyImage", "==", "PENDING").limit(1).get();
+        var pendingQueries = await db.collection("WeatherWindowQueries").where("midjourneyImage", "==", "PROCESSING").limit(1).get();
 
         pendingQueries.forEach(queryDoc => {
             queryPkg = queryDoc.data();
@@ -80,10 +80,10 @@ var channelID = "1125566730761154564";
                 country: queryPkg.country,
                 twitterMediaID: "",
                 tweetID: "",
-                midjourneyImageID:messages.first().attachments.first()
+                midjourneyImageID:messages.first().attachments.first().id
             };
             
-            var basePWD = "/Users/mikeland/OpenAIImages/";
+            var basePWD = "/Users/mikeland/MidjourneyImages/";
             
             var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, basePWD);
             console.log("Photo Downloaded Successfully to", fileName);
@@ -91,6 +91,10 @@ var channelID = "1125566730761154564";
             console.log("Setting new Image Doc");
             await db.collection("weatherwindow").doc(fileName).set(dbDoc);
             console.log("Successfully Setting new Image Doc for Midjourney");
+
+            console.log("Setting new Query Doc");
+            await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({midjourneyImage:fileName});
+            console.log("Successfully updating file name to for midjourneyImage");
 
             process.exit(0);
         } else {
