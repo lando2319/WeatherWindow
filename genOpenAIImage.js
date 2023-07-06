@@ -58,7 +58,7 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
             query: queryPkg.query,
             weather: queryPkg.weather,
             imageSource: "OpenAI",
-            storageDriveID: "76E8-CACF",
+            storageDriveID: "OpenAI",
             spice: queryPkg.spice,
             model: "Dall-E",
             unixTimeStamp: unixTimeStamp.toString(),
@@ -76,7 +76,7 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         dbDoc.originalURL = photoURL;
 
         console.log("Downloading Photo");
-        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Users/mikeland/openAIImages/");
+        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/OpenAI/");
         console.log("Photo Downloaded Successfully to", fileName);
 
         console.log("Setting new Image Doc");

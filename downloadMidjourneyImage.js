@@ -62,7 +62,7 @@ var channelID = "1125566730761154564";
 
             // console.log(util.inspect(messages.first(), false, null));
             // process.exit(0);
-            var photoURL = messages.first().attachments.first().url
+            var photoURL = messages.first().attachments.first().url + "?width=1024&height=1024";
 
             console.log("New Image URL Found", photoURL);
 
@@ -72,7 +72,7 @@ var channelID = "1125566730761154564";
                 query: queryPkg.query,
                 weather: queryPkg.weather,
                 imageSource: "Midjourney",
-                storageDriveID: "MidJourneyDrive",
+                storageDriveID: "Midjourney",
                 spice: queryPkg.spice,
                 model: "",
                 unixTimeStamp: unixTimeStamp.toString(),
@@ -83,7 +83,7 @@ var channelID = "1125566730761154564";
                 midjourneyImageID:messages.first().attachments.first().id
             };
             
-            var basePWD = "/Users/mikeland/MidjourneyImages/";
+            var basePWD = "/Volumes/Midjourney/";
             
             var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, basePWD);
             console.log("Photo Downloaded Successfully to", fileName);

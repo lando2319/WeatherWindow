@@ -71,7 +71,7 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
 
         var openAIImagePkg = openAIDoc.data();
         openAIImagePkg.id = openAIDoc.id;
-        openAIImagePkg.photoPWD = "/Users/mikeland/openAIImages/" + openAIImagePkg.id;
+        openAIImagePkg.photoPWD = "/Volumes/OpenAI/" + openAIImagePkg.id;
 
         var midjourneyDoc = await db.collection("weatherwindow").doc(queryPkg.midjourneyImage).get();
 
@@ -82,7 +82,7 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
 
         var midjourneyImagePkg = midjourneyDoc.data();
         midjourneyImagePkg.id = midjourneyDoc.id;
-        midjourneyImagePkg.photoPWD = "/Users/mikeland/MidjourneyImages/" + midjourneyImagePkg.id;
+        midjourneyImagePkg.photoPWD = "/Volumes/Midjourney/" + midjourneyImagePkg.id;
 
         var aiImagePkgs = [
             sdImagePkg,
