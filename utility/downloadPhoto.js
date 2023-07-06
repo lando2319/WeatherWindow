@@ -1,4 +1,7 @@
 require('dotenv').config({ path: __dirname + '/../.env' });
+
+const sharp = require('sharp');
+
 var formatName = require("./nameFormatterTool.js");
 const fs = require('fs');
 
@@ -12,7 +15,13 @@ async function go(url, name, unixTimeStamp, basePWD) {
         var formattedName = formatName.format(name, unixTimeStamp);
         var finalPwd = basePWD + formattedName;
 
-        fs.writeFileSync(finalPwd, buffer);
+        // update this to be by byte size
+        if (basePWD == "/Volumes/Midjourney/") {
+            const image = await sharp(buffer).resize(1024, 1024).toBuffer();
+            fs.writeFileSync(finalPwd, image);
+        } else {
+            fs.writeFileSync(finalPwd, buffer);
+        }
 
         console.log("Photo", finalPwd, "successfully created");
 
