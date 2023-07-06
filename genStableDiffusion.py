@@ -72,8 +72,7 @@ async def get_pending_docs():
         print("Successfully Generated Image, Updating query with new file name, setting openAIImage as PENDING")
 
         await db.collection("WeatherWindowQueries").document(queryID).update({
-            "stableDiffusionImage": fileName,
-            "openAIImage":"PENDING"
+            "stableDiffusionImage": fileName
         })
 
         print("Completed Stable Diffusion Process")

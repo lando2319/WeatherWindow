@@ -42,16 +42,6 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
             process.exit(0);
         }
 
-        var sdImageDoc = await db.collection("weatherwindow").doc(queryPkg.stableDiffusionImage).get();
-
-        if (!sdImageDoc.exists) {
-            console.log("No Stable Diffusion Image File found");
-            process.exit(0);
-        }
-
-        var sdImagePkg = sdImageDoc.data();
-        sdImagePkg.id = sdImageDoc.id;
-
         var unixTimeStamp = Date.now();
 
         var dbDoc = {
