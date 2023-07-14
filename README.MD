@@ -1,6 +1,6 @@
 # Weather Window
 
-A.I. Generated Photo Of Current Weather In A Random City - “Cloudy weather in Luanda Angola”
+A.I. Generated Photo Of Current Weather In A Random City - Real City, Real Weather, Generated Image - Stable Diffusion | OpenAI Dall-E2 | Midjourney
 
 This code is powering the [Weather Window AI Twitter Account](https://twitter.com/WeatherWindowAI)
 
@@ -11,10 +11,9 @@ This code will
 - save the query in firebase
 - Python Stable Diffusion file grabs the PENDING query
 - Generates Stable Diffusion Image
-- When done it will update a field on the query doc openAIImage as PENDING
-- Next the getOpenAIAndTweet file grabs the PENDING query
 - Generates OpenAI Image
-- Upload and Tweets both images
+- Generates Midjourney Image
+- Upload and Tweets images to the fans
 
 There are also files for casting the new images to a eink display
 
@@ -38,13 +37,15 @@ run `pip install -r requirements.txt`
 Main Files:
 - `node setQuery.js` will set the new query
 - `python genStableDiffusion.py` will generate the stable diffusion based on the query
-- `node genOpenAIAndTweet.js` will generate the openAI image and tweet
+- `node genOpenAIImage.js` will generate the openAI image
+- `node tweetImages.js` will tweet to all the fans
 
-# More
-Hours of Operation
+# Run on your own
+You'll need to adjust some pathways and add keys in order to run on your own
+
+# Hours of Operation
 - 4AM - 2PM
 - 4PM - 10PM
-
 
 Cities Data list from:
 
