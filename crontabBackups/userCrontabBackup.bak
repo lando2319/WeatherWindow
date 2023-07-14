@@ -4,8 +4,14 @@
 # crontab is doing screen opening while `sudo crontab` is doing everything else
 # I could move everything from sudo crontab to crontab is I wanted
 # I'd have to adjust some pathways
-14,44 4-14,16-21 * * * open -a "Google Chrome" --args --start-fullscreen /Users/mikeland/WeatherWindow/home.html >> /Users/mikeland/WeatherWindow.log 2>&1
 
-12 4 * * * /bin/bash /Users/mikeland/WeatherWindow/killChrome.sh >> /Users/mikeland/WeatherWindow.log 2>&1
+02,22,42 4-14,16-21 * * * /bin/bash /Users/mikeland/WeatherWindow/closeChromeReopen.sh >> /Users/mikeland/WeatherWindow.log 2>&1
+
+14 4-14,16-21 * * * /bin/bash /Users/mikeland/WeatherWindow/setQuery.sh >> /Users/mikeland/WeatherWindow.log 2>&1
+17,20 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/downloadMidjourneyImage.js >> /Users/mikeland/WeatherWindow.log 2>&1
+
+21 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js midjourneyImage >> /Users/mikeland/WeatherWindow.log 2>&1
+41 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js openAIImage >> /Users/mikeland/WeatherWindow.log 2>&1
+01 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js stableDiffusionImage >> /Users/mikeland/WeatherWindow.log 2>&1
 
 59 23 * * SUN rm /Users/mikeland/WeatherWindow.log
