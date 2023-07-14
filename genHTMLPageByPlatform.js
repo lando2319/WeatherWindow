@@ -12,6 +12,8 @@ initializeApp({
     credential: cert(serviceAccount)
 });
 
+var imageSource = process.argv[2] || "";
+
 const db = getFirestore();
 
 var date = new Date();
@@ -23,7 +25,7 @@ var prettyDate = date.toLocaleDateString('en-US', {
     minute: 'numeric'
 });
 
-console.log("========================\n\nStarting WeatherWindow genOpenAIAndTweet Process", prettyDate, "\n");
+console.log("========================\n\nStarting WeatherWindow genHTMLPageByPlatform Process", prettyDate, "\n");
 
 (async () => {
     try {
@@ -36,18 +38,28 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
             queryPkg.id = queryDoc.id;
         })
 
-        if (!queryPkg || queryPkg.status != "COMPLETE") {
-            console.log("No OpenAIImage is ready to be shown");
+        var fileName = queryPkg[imageSource];
+        if (fileName == "PENDING" || fileName == "PROCESSING") {
+            console.log(imageSource, "is NOT ready to be shown, current status", fileName);
             process.exit(0);
         }
 
-        console.log("Creating OpenAI HTML Page for Weather Window Actual");
-        queryPkg.source = "OpenAI";
-        queryPkg.photoPWD = "/Volumes/76E8-CACF/" + queryPkg.openAIImage;
-        await genHTML.gen(queryPkg);
+        console.log("Grabbing image doc for", imageSource, "under fileName", fileName);
+        var imageDoc = await db.collection("weatherwindow").doc(fileName).get();
+        var imagePkg = imageDoc.data();
+
+        console.log("Creating", imageSource, "HTML Page for Weather Window Actual");
+        
+        var htmlPkg = {
+            source:imagePkg.imageSource,
+            photoPWD:"/Volumes/" + imagePkg.storageDriveID + "/" + imageDoc.id,
+            query:imagePkg.query
+        };
+
+        await genHTML.gen(htmlPkg);
         console.log("Successfully Created HTML Page for Weather Window Actual");
 
-        console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
+        console.log("\n\nEnding WeatherWindow genHTMLPageByPlatform Process ========================");
         process.exit(0);
     } catch (err) {
         console.log(err);
