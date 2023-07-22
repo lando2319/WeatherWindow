@@ -1,11 +1,11 @@
 const fs = require('fs');
 
 function grab() {
-    var bigCities = [];
+    var places = [];
 
-    const lines = fs.readFileSync(__dirname+'/../worldcities.csv', 'utf8').split('\n');
+    const citiesData = fs.readFileSync(__dirname+'/../data/worldcities.csv', 'utf8').split('\n');
 
-    lines.forEach(line => {
+    citiesData.forEach(line => {
         var cityAttributes = line.split(',');
         var city = cityAttributes[0].replace(/"/g, "");
         var country = (cityAttributes[4] || "").replace(/"/g, ""); 
@@ -14,7 +14,7 @@ function grab() {
         var lat_log = (cityAttributes[2] || "") + "," + (cityAttributes[3] || "")
 
         if (pop > 1000000) {
-            bigCities.push({
+            places.push({
                 city: city,
                 country: country,
                 rawPopulation: pop.toString(),
@@ -23,9 +23,25 @@ function grab() {
         }
     });
 
-    const randomIndex = Math.floor(Math.random() * bigCities.length);
+    const wonderPlacesData = fs.readFileSync(__dirname+'/../data/weather_window_custom.csv', 'utf8').split('\n');
+    wonderPlacesData.forEach(line => {
+        var linePieces = line.split(",");
 
-    var randomPlace = bigCities[randomIndex];
+        var placeName = linePieces[0];
+        var country = linePieces[4];
+        var lat_log = (linePieces[1] || "") + "," + (linePieces[2] || "")
+
+        places.push({
+            city: placeName,
+            country: country.trim(),
+            rawPopulation: "",
+            lat_log: lat_log.replace(/"/g, "")
+        })
+    });
+
+    const randomIndex = Math.floor(Math.random() * places.length);
+
+    var randomPlace = places[randomIndex];
     return randomPlace
 }
 

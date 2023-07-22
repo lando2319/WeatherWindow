@@ -46,6 +46,7 @@ Hours of Operation
 - 4PM - 10PM
 
 
-Cities Data list from:
+# Data
 
-https://simplemaps.com/data/world-cities
+[Cities Data list from Simplemaps](https://simplemaps.com/data/world-cities)
+[Wonders of the World](https://www.kaggle.com/datasets/karnikakapoor/wonders-of-world)
