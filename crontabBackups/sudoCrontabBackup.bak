@@ -6,13 +6,12 @@
 
 01 4-14,16-21 * * * source /Users/mikeland/WeatherWindow/venv/bin/activate && /Users/mikeland/WeatherWindow/venv/bin/python3 /Users/mikeland/WeatherWindow/genStableDiffusion.py >> /tmp/WeatherWindow.log 2>&1
 
-13,20 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIAndTweet.js >> /tmp/WeatherWindow.log 2>&1
+13 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIImage.js >> /tmp/WeatherWindow.log 2>&1
 
-43 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genOpenAIHTMLPage.js >> /tmp/WeatherWindow.log 2>&1
+18,21 4-14,16-21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/tweetImages.js >> /tmp/WeatherWindow.log 2>&1
 
 # HN Vimmy Bot
 30 * * * * /usr/local/bin/node /Users/mikeland/HN_Vimmy_Bot/index.js >> /tmp/HN_Vimmy_Bot.log 2>&1
-
 # HN Kotlin Bot
 45 * * * * /usr/local/bin/node /Users/mikeland/HN_Vimmy_Bot/index.js kotlin >> /tmp/HN_Kotlin_Bot.log 2>&1
 
