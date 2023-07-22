@@ -50,4 +50,5 @@ You'll need to adjust some pathways and add keys in order to run on your own
 # Data
 
 [Cities Data list from Simplemaps](https://simplemaps.com/data/world-cities)
+
 [Wonders of the World](https://www.kaggle.com/datasets/karnikakapoor/wonders-of-world)
