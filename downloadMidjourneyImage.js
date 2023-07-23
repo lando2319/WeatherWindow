@@ -52,8 +52,9 @@ var channelID = "1125566730761154564";
         var messages = await channel.messages.fetch({limit:1})
 
         if (messages && messages.first() && messages.first().attachments.first()) {
-            console.log("Checking if image has already been downloaded");
-            var pendingQueries = await db.collection("WeatherWindow").where("midjourneyImageID", "==", messages.first().id).limit(1).get();
+            var attachmentID = messages.first().attachments.first().id;
+            console.log("Checking if image has already been downloaded under attachmentID", attachmentID);
+            var pendingQueries = await db.collection("weatherwindow").where("midjourneyImageID", "==", attachmentID).limit(1).get();
 
             if (!pendingQueries.empty) {
                 console.log("Already Downloaded Image");
@@ -80,7 +81,7 @@ var channelID = "1125566730761154564";
                 country: queryPkg.country,
                 twitterMediaID: "",
                 tweetID: "",
-                midjourneyImageID:messages.first().attachments.first().id
+                midjourneyImageID:attachmentID
             };
             
             var basePWD = "/Volumes/Midjourney/";
