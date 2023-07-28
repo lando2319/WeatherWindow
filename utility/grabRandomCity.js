@@ -13,7 +13,15 @@ function grab() {
         var pop = popraw.replace(/"/g, "")
         var lat_log = (cityAttributes[2] || "") + "," + (cityAttributes[3] || "")
 
-        if (pop > 1000000) {
+        const chinaDampener = Math.floor(Math.random() * 2);
+        var skipEntry = false;
+
+        if (country == "China" && chinaDampener == 0) {
+            skipEntry = true;
+        }
+        
+
+        if (pop > 1000000 && !skipEntry) {
             places.push({
                 city: city,
                 country: country,
