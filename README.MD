@@ -50,5 +50,12 @@ You'll need to adjust some pathways and add keys in order to run on your own
 # Data
 
 [Cities Data list from Simplemaps](https://simplemaps.com/data/world-cities)
+Showing Cities at or over 1M population
 
 [Wonders of the World](https://www.kaggle.com/datasets/karnikakapoor/wonders-of-world)
+Showing most of these
+
+[Points of Interest](https://www.kaggle.com/datasets/ehallmar/points-of-interest-poi-database)
+I grabbed places from here too
+
+Custom list is in /data/
