@@ -32,4 +32,20 @@ async function go(url, name, unixTimeStamp, basePWD) {
     };
 }
 
+async function downloadCensoredPhoto(censorFileName, unixTimeStamp, basePWD) {
+    try {
+        console.log("Downloading Censored Photo", censorFileName);
+
+        var formattedName = formatName.format(censorFileName, unixTimeStamp);
+        await fs.copyFileSync("/Users/mikeland/censoredImages/" + censorFileName + ".png", basePWD + formattedName);
+        console.log("Successfully Downloaded Censored Photo", formattedName);
+
+        return formattedName
+    } catch (err) {
+        console.log("Error on downloadCensoredPhoto", err);
+        process.exit(1);
+    }
+};
+
 module.exports.go = go;
+module.exports.downloadCensoredPhoto = downloadCensoredPhoto;
