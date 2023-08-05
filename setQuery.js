@@ -32,7 +32,7 @@ var topOfHourDateTime = date.toLocaleDateString('en-US', {
     hour: 'numeric'
 });
 
-var spiceRating = 3;
+var spiceRating = 4;
 
 console.log("========================\n\nStarting WeatherWindow Set Query Process", prettyDate, "\n");
 
