@@ -27,9 +27,31 @@ var prettyDate = date.toLocaleDateString('en-US', {
 
 console.log("========================\n\nStarting WeatherWindow genOpenAIAndTweet Process", prettyDate, "\n");
 
+var unixTimeStamp = Date.now();
+
+function genDBDoc(queryPkg) {
+
+    var dbDoc = {
+        query: queryPkg.query,
+        weather: queryPkg.weather,
+        imageSource: "OpenAI",
+        storageDriveID: "OpenAI",
+        spice: queryPkg.spice,
+        model: "Dall-E",
+        unixTimeStamp: unixTimeStamp.toString(),
+        city: queryPkg.city,
+        country: queryPkg.country,
+        twitterMediaID: "",
+        tweetID: ""
+    };
+
+    return dbDoc;
+};
+
 (async () => {
+    var queryPkg;
+
     try {
-        var queryPkg;
         var pendingQueries = await db.collection("WeatherWindowQueries").where("openAIImage", "==", "PENDING").limit(1).get();
 
         pendingQueries.forEach(queryDoc => {
@@ -42,26 +64,12 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
             process.exit(0);
         }
 
-        var unixTimeStamp = Date.now();
-
-        var dbDoc = {
-            query: queryPkg.query,
-            weather: queryPkg.weather,
-            imageSource: "OpenAI",
-            storageDriveID: "OpenAI",
-            spice: queryPkg.spice,
-            model: "Dall-E",
-            unixTimeStamp: unixTimeStamp.toString(),
-            city: queryPkg.city,
-            country: queryPkg.country,
-            twitterMediaID: "",
-            tweetID: ""
-        };
-
         console.log("Querying OpenAI For Photo of", queryPkg.query);
         console.log("GENENERATING PHOTO NOW, THIS MAY TAKE A MOMENT");
         var photoURL = await generateOpenAIImage.grab(queryPkg.query);
         console.log("Successfully Generated OpenAI Image");
+
+        var dbDoc = genDBDoc(queryPkg);
 
         dbDoc.originalURL = photoURL;
 
@@ -80,6 +88,21 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
         process.exit(0);
     } catch (err) {
+        
+        if (queryPkg && queryPkg.id && err == "CleanError Error: Request failed with status code 400 Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.") {
+            var dbDoc = genDBDoc(queryPkg);
+            console.log("Setting new CENSORED Image Doc");
+
+            var fileName = await downloadPhoto.downloadCensoredPhoto("censored-saftey-system", unixTimeStamp, "/Volumes/OpenAI/");
+
+            await db.collection("weatherwindow").doc(fileName).set(dbDoc);
+            console.log("Successfully Set new CENSORED Image Doc");
+
+            console.log("Saving CENSORED openAIImage");
+            await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({openAIImage:fileName});
+            console.log("Successfully Saved censorPkg");
+        };
+
         console.log(err);
         await genErrorPage.gen(err);
     }
