@@ -14,7 +14,7 @@ function spiceThis(query, spiceRating) {
         "in octane render style",
         "in neo-noir style",
         "in anime retro nostalgia style",
-        "in bight and bold in contrast style",
+        "in bright and bold in contrast style",
         "in manga style"
     ]
 
