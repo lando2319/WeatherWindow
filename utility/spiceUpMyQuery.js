@@ -15,7 +15,9 @@ function spiceThis(query, spiceRating) {
         "in neo-noir style",
         "in anime retro nostalgia style",
         "in bright and bold in contrast style",
-        "in manga style"
+        "in manga style",
+        "in oil painting style",
+        "in thriller film style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
