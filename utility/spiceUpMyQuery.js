@@ -17,7 +17,13 @@ function spiceThis(query, spiceRating) {
         "in bright and bold in contrast style",
         "in manga style",
         "in oil painting style",
-        "in thriller film style"
+        "in thriller film style",
+        "in real photography, 4k high quality style",
+        "in raw style",
+        "in 3D illustration style",
+        "in watercolor style",
+        "in vector art style",
+        "in vintage photograph style",
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
