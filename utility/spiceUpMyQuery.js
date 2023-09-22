@@ -24,6 +24,7 @@ function spiceThis(query, spiceRating) {
         "in watercolor style",
         "in vector art style",
         "in vintage photograph style",
+        "in Art Nouveau style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;

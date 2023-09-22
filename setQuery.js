@@ -8,7 +8,7 @@ var grabWeatherForecase = require('./utility/grabWeather.js');
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
-const serviceAccount = require('/Users/mikeland/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME);
+const serviceAccount = require(process.env.SERVICE_FILE_PATHWAY);
 
 initializeApp({
     credential: cert(serviceAccount)
@@ -67,7 +67,13 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
         
         console.log("First time processing this hour, continuing process");
         var pkg = grabRandomCity.grab();
-        pkg.place = pkg.city + " " + pkg.country;
+
+        var stateOrSpace = " ";
+        if (pkg.state) {
+            stateOrSpace = " " + pkg.state + " ";
+        };
+
+        pkg.place = pkg.city + stateOrSpace + pkg.country;
         pkg.population = populationFormatter.prettyPop(pkg.rawPopulation)
 
         console.log("Successfully Grabbed Random place:");
@@ -100,7 +106,10 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             midjourneyImage:"PENDING"
         };
 
-        // console.log(dbDoc);
+        if (pkg.state) {
+            dbDoc.state = pkg.state;
+        }
+
         await db.collection("WeatherWindowQueries").doc(unixTimeStamp.toString()).set(dbDoc);
 
         console.log("Successfully Set Firebase Doc");
