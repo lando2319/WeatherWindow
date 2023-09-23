@@ -43,12 +43,13 @@ function grab() {
         var linePieces = line.split(",");
 
         var placeName = linePieces[0];
-        var country = linePieces[4];
-        var state = linePieces[3];
+        var city = linePieces[3];
+        var country = linePieces[5];
+        var state = linePieces[4];
         var lat_log = (linePieces[1] || "") + "," + (linePieces[2] || "")
 
         var place = {
-            city: placeName,
+            city: (placeName + " " + city).trim(),
             country: country.trim(),
             rawPopulation: "",
             lat_log: lat_log.replace(/"/g, "")
