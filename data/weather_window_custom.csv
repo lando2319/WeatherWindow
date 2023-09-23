@@ -7,12 +7,12 @@ Colossus of Rhodes,36.4511,28.2278,,Greece,Wonders Of The World
 Mausoleum at Halicarnassus,37.03777778,27.42416667,Bodrum,Turkey,Wonders Of The World
 Statue of Zeus at Olympia,37.63777778,21.63,,Greece,Wonders Of The World
 Temple of Artemis at Ephesus,37.94972222,27.36388889,,Turkey,Wonders Of The World
-Golden Gate Bridge,37.81972222,-122.4786111,San Francisco, United States,Wonders Of The World
+Golden Gate Bridge,37.81972222,-122.4786111,San Francisco,United States,Wonders Of The World
 CN Tower,43.6425,-78.61305556,Toronto, Canada,Wonders Of The World
 Channel Tunnel,51.0125,1.5041,English Channel,England,Wonders Of The World
 Delta Works (Zuiderzee Works),51.65,3.72,,Netherlands,Wonders Of The World
 Panama Canal,9.08,-79.68,,Panama,Wonders Of The World
-Empire State Building,40.74833333,-73.98555556,New York, United States,Wonders Of The World
+Empire State Building,40.74833333,-73.98555556,New York,United States,Wonders Of The World
 Itaipu Dam,-24.59194444,-54.58888889,,Brazil,Wonders Of The World
 Catacombs of Kom el Shoqafa,31.178558,29.892954,Alexandria, Egypt,Wonders Of The World
 Great Wall of China,40.67693,117.23193,,China,Wonders Of The World
@@ -26,17 +26,17 @@ Colosseum,41.89,12.49222222,Rome, Italy,Wonders Of The World
 Petra,30.32861111,35.44194444,Ma'an, Jordan,Wonders Of The World
 Taj Mahal,27.175,78.04194444,Agra Uttar Pradesh, India,Wonders Of The World
 Paricutin,19.49277778,-102.2508333,,Mexico,Wonders Of The World
-Grand Canyon,36.1,-112.1,Arizona, United States,Wonders Of The World
+Grand Canyon,36.1,-112.1,Arizona,United States,Wonders Of The World
 Guanabara Bay,-21.20972222,-43.15555556,,Brazil,Wonders Of The World
 Victoria Falls,-16.07555556,25.85666667,Livingstone, Zambia,Wonders Of The World
 Mount Everest,27.98805556,86.92527778,,Nepal,Wonders Of The World
 Great Barrier Reef,-17.71388889,147.7,Queensland, Australia,Wonders Of The World
-Hoover Dam,36.01555556,-114.7377778,Nevada, United States,Wonders Of The World
+Hoover Dam,36.01555556,-114.7377778,Nevada,United States,Wonders Of The World
 Panama Canal,9.08,-79.68,,Panama,Wonders Of The World
-Brooklyn Bridge,40.70555556,-73.99638889,New York, United States,Wonders Of The World
+Brooklyn Bridge,40.70555556,-73.99638889,New York,United States,Wonders Of The World
 Bell Rock Lighthouse,56.43416667,-2.387222222,,United Kingdom,Wonders Of The World
 Papahanaumokuakea Marine National Monument,25.7,-171.7333333, Hawaii ,United States ,Wonders Of The World
-Grand Canyon,36.1,-112.1,Arizona, United States,Wonders Of The World
+Grand Canyon,36.1,-112.1,Arizona,United States,Wonders Of The World
 Old City (Jerusalem),31.77666667,35.23416667,Jerusalem,Israel,Wonders Of The World
 Maasai Mara,-0.51,35.14388889,Narok County, Kenya,Wonders Of The World
 Potala Palace,29.65777778,91.11694444,Lhasa, Tibet,Wonders Of The World
@@ -80,17 +80,17 @@ Mount Kilimanjaro,-0.053683419,0.651938653,,Tanzania,Points of Interest
 K2,0.626267769,1.335409588,Karakoram,Pakistan,Points of Interest
 North Sentinel Island,0.201707702,1.609909155, Andaman Islands,India,Points of Interest
 Angkor Wat,0.234092286,1.812815316,,Cambodia,Points of Interest
-Empire State Building,0.711194327,-1.291293289,New York City,USA,Points of Interest
-Myrtle Beach,0.588945212,-1.376532018,South Carolina,USA,Points of Interest
-Yosemite National Park,0.660607122,-2.086541121,California,USA,Points of Interest
+Empire State Building,0.711194327,-1.291293289,New York City,United States,Points of Interest
+Myrtle Beach,0.588945212,-1.376532018,South Carolina,United States,Points of Interest
+Yosemite National Park,0.660607122,-2.086541121,California,United States,Points of Interest
 Burj Khalifa,25.2697,55.3094,Dubai,UAE,Points of Interest
-Waikiki Beach,0.37113457,-2.7545126,Honolulu,USA,Points of Interest
-Niagara Falls,0.752236908,-1.379100997,New York,USA,Points of Interest
+Waikiki Beach,0.37113457,-2.7545126,Honolulu,United States,Points of Interest
+Niagara Falls,0.752236908,-1.379100997,New York,United States,Points of Interest
 Norte Dame Church,48.8566,2.3522,Paris,France,Custom
-Times Square,40.6943,-73.9249,New York,USA,Custom
+Times Square,40.6943,-73.9249,New York,United States,Custom
 Big Ben,51.5072,-0.1275,London,England,Custom
 Berlin Wall,52.5167,13.3833,Berlin,Germeny,Custom
-Disney World,0.495167362,-1.4227575,Florida,USA,Points of Interest
+Disney World,0.495167362,-1.4227575,Florida,United States,Points of Interest
 Eiffel Tower,0.852736844,0.04004658,Paris,France,Points of Interest
 Salar de Uyuni Salt Flats,-0.36335331,-1.183008408,Potosi,Bolivia,Points of Interest
 Bora Bora,-0.286995155,-2.648580773,,French Polynesia,Points of Interest
