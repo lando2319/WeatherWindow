@@ -82,7 +82,14 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
         console.log(" LATITUDE, LOGITUDE:", pkg.lat_log);
 
         var weatherSummary = await grabWeatherForecase.grab(pkg.lat_log);
-        pkg.query = weatherSummary + " weather in " + pkg.place;
+
+        var inOrConjunctionOverride = " in ";
+
+        if (pkg.conjunctionOverride) {
+            inOrConjunctionOverride = " " + pkg.conjunctionOverride + " ";
+        };
+
+        pkg.query = weatherSummary + " weather" + inOrConjunctionOverride + pkg.place;
 
         var spice = spiceUpMyQuery.spiceThis(pkg.query, spiceRating);
 

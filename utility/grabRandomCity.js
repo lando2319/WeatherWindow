@@ -39,12 +39,14 @@ function grab() {
     });
 
     const wonderPlacesData = fs.readFileSync(__dirname+'/../data/weather_window_custom.csv', 'utf8').split('\n');
-    wonderPlacesData.forEach(line => {
+    for (let i = 1; i < wonderPlacesData.length; i++) {
+        const line = wonderPlacesData[i];
         var linePieces = line.split(",");
 
         var placeName = linePieces[0];
         var city = linePieces[3];
         var country = linePieces[5];
+        var conjunctionOverride = linePieces[6];
         var state = linePieces[4];
         var lat_log = (linePieces[1] || "") + "," + (linePieces[2] || "")
 
@@ -59,8 +61,12 @@ function grab() {
             place.state = state;
         }
 
+        if (conjunctionOverride) {
+            place.conjunctionOverride = conjunctionOverride;
+        }
+
         places.push(place)
-    });
+    };
 
     const randomIndex = Math.floor(Math.random() * places.length);
 

@@ -12,7 +12,7 @@ async function grab(query) {
     try {
         const response = await openai.createImage({
             prompt: query,
-            n: 1,
+            n: 1, // should I raise this
             size: "1024x1024",
         });
         var image_url = response.data.data[0].url;
