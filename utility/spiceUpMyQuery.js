@@ -28,7 +28,9 @@ function spiceThis(query, spiceRating) {
         "in monochrome style",
         "in neon style",
         "in Urban and Classy style",
-        "in cyberpunk style"
+        "in cyberpunk style",
+        "in retrowave vaporwave style",
+        "in neon, steampunk, bioshock style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
