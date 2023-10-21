@@ -10,19 +10,24 @@ function grab() {
         var city = cityAttributes[0].replace(/"/g, "");
         var country = (cityAttributes[4] || "").replace(/"/g, ""); 
         var state = (cityAttributes[7] || "").replace(/"/g, ""); 
+        var capitalStatus = (cityAttributes[8] || "").replace(/"/g, "").toString();
         var popraw = (cityAttributes[9] || "").toString();
         var pop = popraw.replace(/"/g, "")
         var lat_log = (cityAttributes[2] || "") + "," + (cityAttributes[3] || "")
 
         const chinaDampener = Math.floor(Math.random() * 2);
         var skipEntry = false;
+        var isCapital = false;
 
         if (country == "China" && chinaDampener == 0) {
             skipEntry = true;
         }
         
+        if (capitalStatus == "primary") {
+            isCapital = true
+        }
 
-        if (pop > 1000000 && !skipEntry) {
+        if (!skipEntry && (pop > 1000000 || isCapital)) {
             var place = {
                 city: city,
                 country: country,
