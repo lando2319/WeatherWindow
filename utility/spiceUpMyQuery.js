@@ -30,7 +30,6 @@ function spiceThis(query, spiceRating) {
         "in Urban and Classy style",
         "in cyberpunk style",
         "in retrowave vaporwave style",
-        "in neon, steampunk, bioshock style",
         "2D hand drawn style"
     ]
 
