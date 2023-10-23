@@ -30,7 +30,8 @@ function spiceThis(query, spiceRating) {
         "in Urban and Classy style",
         "in cyberpunk style",
         "in retrowave vaporwave style",
-        "2D hand drawn style"
+        "2D hand drawn style",
+        "workcut-inspired graphics, illustration style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
