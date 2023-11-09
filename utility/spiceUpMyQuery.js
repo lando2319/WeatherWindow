@@ -26,9 +26,7 @@ function spiceThis(query, spiceRating) {
         "in vintage photograph style",
         "in Art Nouveau style",
         "in monochrome style",
-        "in neon style",
         "in Urban and Classy style",
-        "in cyberpunk style",
         "in retrowave vaporwave style",
         "2D hand drawn style",
         "workcut-inspired graphics, illustration style"
