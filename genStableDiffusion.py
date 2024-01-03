@@ -53,6 +53,10 @@ async def get_pending_docs():
 
         image.save(filepwd)
 
+        backuppwd = "/Volumes/AI_Backups/StableDiffusion/" + fileName
+
+        image.save(backuppwd)
+
         print("Setting new File Record in firestore")
         await db.collection("weatherwindow").document(fileName).set({
             "city":queryDoc['city'],
