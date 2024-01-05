@@ -74,7 +74,7 @@ function genDBDoc(queryPkg) {
         dbDoc.originalURL = photoURL;
 
         console.log("Downloading Photo");
-        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/OpenAI/", "/Volumes/AI_Backups/OpenAI/");
+        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/OpenAI/", "/Volumes/AI_Backups/OpenAI/", "/Volumes/2AI_Backups/OpenAI/");
         console.log("Photo Downloaded Successfully to", fileName);
 
         console.log("Setting new Image Doc");
