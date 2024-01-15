@@ -29,7 +29,8 @@ function spiceThis(query, spiceRating) {
         "in Urban and Classy style",
         "in retrowave vaporwave style",
         "2D hand drawn style",
-        "workcut-inspired graphics, illustration style"
+        "workcut-inspired graphics, illustration style",
+        "in meticulously hyper detailed, high contrast, artstation style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
