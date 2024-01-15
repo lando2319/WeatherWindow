@@ -7,7 +7,7 @@ var query = "Clear weather in Dalian China";
 (async () => {
     try {
         var unixTimeStamp = Date.now();
-        var fileName = await downloadPhoto.go(url, query, unixTimeStamp, "/Volumes/Midjourney/");
+        var fileName = await downloadPhoto.go(url, query, unixTimeStamp, "/Volumes/Midjourney/", "/Volumes/AI_Backups/Midjourney/");
         console.log("Photo Downloaded Successfully to", fileName);
     } catch (err) {
         console.log("DISCORD ERROR");
