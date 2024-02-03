@@ -5,7 +5,7 @@ const sharp = require('sharp');
 var formatName = require("./nameFormatterTool.js");
 const fs = require('fs');
 
-async function go(url, name, unixTimeStamp, basePWD, backupPWD, backupPWD2) {
+async function go(url, name, unixTimeStamp, basePWD) {
     try {
         const response = await fetch(url);
         const blob = await response.blob();
@@ -16,19 +16,12 @@ async function go(url, name, unixTimeStamp, basePWD, backupPWD, backupPWD2) {
         var finalPwd = basePWD + formattedName;
 
         // update this to be by byte size
-        if (basePWD == "/Volumes/Midjourney/") {
+        if (basePWD == "/Users/mikeland/Desktop/Midjourney/") {
             const image = await sharp(buffer).resize(1024, 1024).toBuffer();
             console.log("Writing to", finalPwd);
             await fs.writeFileSync(finalPwd, image);
-
-            console.log("Writing to", backupPWD);
-            await fs.writeFileSync(backupPWD + formattedName, image);
-
-            console.log("Writing to", backupPWD2);
-            await fs.writeFileSync(backupPWD2 + formattedName, image);
         } else {
             await fs.writeFileSync(finalPwd, buffer);
-            await fs.writeFileSync(backupPWD + formattedName, buffer);
         }
 
         console.log("Photo", finalPwd, "successfully created");

@@ -84,11 +84,9 @@ var channelID = "1125566730761154564";
                 midjourneyImageID:attachmentID
             };
             
-            var basePWD = "/Volumes/Midjourney/";
-            var backupPWD = "/Volumes/AI_Backups/Midjourney/";
-            var backupPWD2 = "/Volumes/2AI_Backups/Midjourney/";
+            var basePWD = "/Users/mikeland/Desktop/Midjourney/";
             
-            var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, basePWD, backupPWD, backupPWD2);
+            var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, basePWD);
             console.log("Photo Downloaded Successfully to", fileName);
 
             console.log("Setting new Image Doc");

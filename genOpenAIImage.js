@@ -74,7 +74,7 @@ function genDBDoc(queryPkg) {
         dbDoc.originalURL = photoURL;
 
         console.log("Downloading Photo");
-        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Volumes/OpenAI/", "/Volumes/AI_Backups/OpenAI/", "/Volumes/2AI_Backups/OpenAI/");
+        var fileName = await downloadPhoto.go(photoURL, queryPkg.query, unixTimeStamp, "/Users/mikeland/Desktop/OpenAI/");
         console.log("Photo Downloaded Successfully to", fileName);
 
         console.log("Setting new Image Doc");
@@ -93,7 +93,7 @@ function genDBDoc(queryPkg) {
             var dbDoc = genDBDoc(queryPkg);
             console.log("Setting new CENSORED Image Doc");
 
-            var fileName = await downloadPhoto.downloadCensoredPhoto("censored-saftey-system", unixTimeStamp, "/Volumes/OpenAI/");
+            var fileName = await downloadPhoto.downloadCensoredPhoto("censored-saftey-system", unixTimeStamp, "/Users/mikeland/Desktop/OpenAI/");
 
             await db.collection("weatherwindow").doc(fileName).set(dbDoc);
             console.log("Successfully Set new CENSORED Image Doc");

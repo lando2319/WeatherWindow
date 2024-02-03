@@ -52,7 +52,7 @@ console.log("========================\n\nStarting WeatherWindow genHTMLPageByPla
         
         var htmlPkg = {
             source:imagePkg.imageSource,
-            photoPWD:"/Volumes/" + imagePkg.storageDriveID + "/" + imageDoc.id,
+            photoPWD:"/Users/mikeland/Desktop/" + imagePkg.storageDriveID + "/" + imageDoc.id,
             query:imagePkg.query
         };
 

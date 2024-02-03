@@ -49,17 +49,9 @@ async def get_pending_docs():
 
         image = pipe(queryDoc['query'], num_inference_steps=steps).images[0]
 
-        filepwd = "/Volumes/SD_Drive/" + fileName
+        filepwd = "/Users/mikeland/Desktop/StableDiffusion/" + fileName
 
         image.save(filepwd)
-
-        backuppwd = "/Volumes/AI_Backups/StableDiffusion/" + fileName
-
-        image.save(backuppwd)
-
-        backuppwd = "/Volumes/2AI_Backups/StableDiffusion/" + fileName
-
-        image.save(backuppwd)
 
         print("Setting new File Record in firestore")
         await db.collection("weatherwindow").document(fileName).set({
@@ -70,7 +62,7 @@ async def get_pending_docs():
             "originalURL":"",
             "query":queryDoc['query'],
             "spice":queryDoc['spice'],
-            "storageDriveID":"SD_Drive",
+            "storageDriveID":"StableDiffusion",
             "tweetID":"",
             "twitterMediaID":"",
             "unixTimeStamp":timestamp,
@@ -86,7 +78,6 @@ async def get_pending_docs():
         print("Completed Stable Diffusion Process")
     else:
         print("No query found as PENDING")
-
 
 def formatName(name, rightNow):
   formattedName = name.lower()
