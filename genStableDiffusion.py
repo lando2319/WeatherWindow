@@ -3,22 +3,31 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore_async
 
+import torch
+
 from dotenv import load_dotenv
 import asyncio
 import os
 import time
 
-from diffusers import DiffusionPipeline
+load_dotenv()
 
-pipe = DiffusionPipeline.from_pretrained("stabilityai/stable-diffusion-2-1")
-pipe = pipe.to("mps")
+from diffusers import StableDiffusion3Pipeline
+
+os.environ["PYTORCH_MPS_HIGH_WATERMARK_RATIO"] = "0.0"
+
+pipe = StableDiffusion3Pipeline.from_pretrained(
+        "stabilityai/stable-diffusion-3-medium-diffusers", 
+        low_cpu_mem_usage=False,
+        torch_dtype=torch.float16,
+        variant="fp16",
+        use_safttensors=True
+        ).to("mps")
 
 pipe.set_progress_bar_config(disable=True)
 pipe.enable_attention_slicing()
 
 timestamp = str(time.time_ns() // 1000000)
-
-load_dotenv()
 
 print("initializing firebase")
 
@@ -28,7 +37,7 @@ app = firebase_admin.initialize_app(cred)
 
 db = firestore_async.client()
 
-steps = 200
+steps = 40
 
 async def get_pending_docs():
     docs = db.collection("WeatherWindowQueries").where("stableDiffusionImage", "==", "PENDING").stream()
@@ -58,7 +67,7 @@ async def get_pending_docs():
             "city":queryDoc['city'],
             "country":queryDoc['country'],
             "imageSource":"stabilityai",
-            "model":"stable-diffusion-2-1",
+            "model":"stable-diffusion-3-medium",
             "originalURL":"",
             "query":queryDoc['query'],
             "spice":queryDoc['spice'],
