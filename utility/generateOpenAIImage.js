@@ -1,21 +1,20 @@
 require('dotenv').config({ path: __dirname + '/../.env' })
 var getCleanError = require("./errorHandling.js");
 
-const { Configuration, OpenAIApi } = require("openai");
-const configuration = new Configuration({
+const { OpenAI } = require("openai");
+const client = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY
 });
 
-const openai = new OpenAIApi(configuration);
-
 async function grab(query) {
     try {
-        const response = await openai.createImage({
+        const response = await client.images.generate({ 
+            model: "dall-e-3", 
             prompt: query,
-            n: 1, // should I raise this
-            size: "1024x1024",
+            size: "1024x1024"
         });
-        var image_url = response.data.data[0].url;
+
+        var image_url = response.data[0].url;
 
         return image_url
     } catch (err) {

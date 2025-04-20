@@ -37,7 +37,7 @@ function genDBDoc(queryPkg) {
         imageSource: "OpenAI",
         storageDriveID: "OpenAI",
         spice: queryPkg.spice,
-        model: "Dall-E",
+        model: "Dall-E3",
         unixTimeStamp: unixTimeStamp.toString(),
         city: queryPkg.city,
         country: queryPkg.country,
