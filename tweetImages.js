@@ -46,6 +46,9 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
         } else if (queryPkg.openAIImage == "PENDING") {
             console.log("Waiting on OpenAI Image, ending process");
             process.exit(0);
+        } else if (queryPkg.geminiImage == "PENDING") {
+            console.log("Waiting on Gemini Image, ending process");
+            process.exit(0);
         } else if (queryPkg.midjourneyImage == "PENDING" || queryPkg.midjourneyImage == "PROCESSING") {
             console.log("Waiting on midjourney Image, ending process");
             process.exit(0);
@@ -73,6 +76,17 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
         openAIImagePkg.id = openAIDoc.id;
         openAIImagePkg.photoPWD = "/Users/mikeland/Desktop/OpenAI/" + openAIImagePkg.id;
 
+        var geminiDoc = await db.collection("weatherwindow").doc(queryPkg.geminiImage).get();
+
+        if (!geminiDoc.exists) {
+            console.log("No Gemini Image doc found");
+            process.exit(0);
+        }
+
+        var geminiImagePkg = geminiDoc.data();
+        geminiImagePkg.id = geminiDoc.id;
+        geminiImagePkg.photoPWD = "/Users/mikeland/Desktop/Gemini/" + geminiImagePkg.id;
+
         var midjourneyDoc = await db.collection("weatherwindow").doc(queryPkg.midjourneyImage).get();
 
         if (!midjourneyDoc.exists) {
@@ -87,6 +101,7 @@ console.log("========================\n\nStarting WeatherWindow tweetImage Proce
         var aiImagePkgs = [
             sdImagePkg,
             openAIImagePkg,
+            geminiImagePkg,
             midjourneyImagePkg
         ];
 
