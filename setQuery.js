@@ -105,6 +105,7 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
             weather: weatherSummary,
             city: pkg.city,
             country: pkg.country,
+            geminiImage: "PENDING",
             openAIImage: "PENDING",
             stableDiffusionImage: "PENDING",
             createdAt:FieldValue.serverTimestamp(),
