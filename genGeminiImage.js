@@ -85,7 +85,7 @@ function genDBDoc(queryPkg) {
         console.log("Successfully Setting new Image Doc");
 
         console.log("Setting new Query Doc");
-        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({geminiImage:fileName});
+        await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({geminiImage:formattedName});
         console.log("Successfully Setting OpenAIImage on Query Doc as filename");
 
         console.log("\n\nEnding WeatherWindow genOpenAIAndTweet Process ========================");
