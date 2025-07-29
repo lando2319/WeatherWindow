@@ -8,7 +8,14 @@ var tweetPhoto = require("./utility/twitterTool.js");
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
-const serviceAccount = require('/Users/mikeland/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME);
+var serviceAccountRoute = '/Users/mikeland/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME;
+if (process.env.ENV == "DEV") {
+    serviceAccountRoute = '/Users/mikeland/newDay/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME;
+}
+
+const serviceAccount = require(
+    serviceAccountRoute
+);
 
 initializeApp({
     credential: cert(serviceAccount)
@@ -89,7 +96,7 @@ function genDBDoc(queryPkg) {
         process.exit(0);
     } catch (err) {
         
-        if (queryPkg && queryPkg.id && err == "CleanError Error: Request failed with status code 400 Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.") {
+        if (queryPkg && queryPkg.id && err == "ERROR Error: 400 Your request was rejected as a result of our safety system. Your prompt may contain text that is not allowed by our safety system.") {
             var dbDoc = genDBDoc(queryPkg);
             console.log("Setting new CENSORED Image Doc");
 
