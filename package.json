@@ -18,7 +18,9 @@
     "mocha": "^10.2.0",
     "openai": "^4.95.1",
     "request": "^2.88.2",
+    "screenshot-desktop": "^1.15.1",
     "sharp": "^0.32.1",
+    "tesseract.js": "^6.0.1",
     "twitter-api-v2": "^1.14.2"
   }
 }
