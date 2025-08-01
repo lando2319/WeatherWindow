@@ -24,7 +24,6 @@ const db = getFirestore();
 (async () => {
     try {
         var docID;
-        // var pendingQueries = await db.collection("WeatherWindowQueries").where("midjourneyImageX", "==", "PROCESSING").limit(1).get();
         var pendingQueries = await db.collection("WeatherWindowQueries").where("midjourneyImage", "==", "PROCESSING").limit(1).get();
 
         pendingQueries.forEach(queryDoc => {

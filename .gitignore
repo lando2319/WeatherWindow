@@ -17,4 +17,5 @@ venv/
 
 WeatherWindow.log
 
-*.scpt
+setQuery-production.scpt
+setQuery-sandbox.scpt
