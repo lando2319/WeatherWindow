@@ -50,7 +50,7 @@ on run argv
 
         # Click Save Icon
 		keystroke return
-		delay 1
+		delay 2
 
 		keystroke return
 		delay 0.8
