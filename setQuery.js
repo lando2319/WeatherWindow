@@ -8,7 +8,14 @@ var grabWeatherForecase = require('./utility/grabWeather.js');
 const { initializeApp, applicationDefault, cert } = require('firebase-admin/app');
 const { getFirestore, Timestamp, FieldValue, Filter } = require('firebase-admin/firestore');
 
-const serviceAccount = require(process.env.SERVICE_FILE_PATHWAY);
+var serviceAccountRoute = '/Users/mikeland/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME;
+if (process.env.ENV == "DEV") {
+    serviceAccountRoute = '/Users/mikeland/newDay/WeatherWindow/config/' + process.env.SERVICE_FILE_NAME;
+}
+
+const serviceAccount = require(
+    serviceAccountRoute
+);
 
 initializeApp({
     credential: cert(serviceAccount)
@@ -67,6 +74,12 @@ console.log("========================\n\nStarting WeatherWindow Set Query Proces
         
         console.log("First time processing this hour, continuing process");
         var pkg = grabRandomCity.grab();
+        // var pkg = {
+        //     city: "Kabul",
+        //     country: "Afganistan",
+        //     rawPopulation: "1004993580",
+        //     lat_log: "34.5328,69.1658"
+        // };
 
         var stateOrSpace = " ";
         if (pkg.state) {
