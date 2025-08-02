@@ -22,8 +22,6 @@ on run argv
         key code 48 using shift down
 		delay 0.5
         key code 48 using shift down
-		# delay 0.3
-        # key code 48 using shift down
 		delay 0.8
         key code 48 using shift down
 		delay 0.9
@@ -52,7 +50,7 @@ on run argv
 
         # Click Save Icon
 		keystroke return
-		delay 0.8
+		delay 1
 
 		keystroke return
 		delay 0.8
