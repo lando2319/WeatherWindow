@@ -47,6 +47,10 @@ You'll need to adjust some pathways and add keys in order to run on your own
 - 4AM - 2PM
 - 4PM - 10PM
 
+# Reconnect keyboard osa script
+Sometime I have to reconnect keystroke accessiblity
+Settings > Privacy > Accessibility
+
 # Data
 
 [Cities Data list from Simplemaps](https://simplemaps.com/data/world-cities)
