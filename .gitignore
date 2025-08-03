@@ -8,6 +8,9 @@ tester2.js
 home.html
 .vscode/
 
+eng.traineddata
+
+
 config/*
 !/config/.gitkeep
 

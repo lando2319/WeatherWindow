@@ -83,6 +83,11 @@ var channelID = "1125566730761154564";
                 tweetID: "",
                 midjourneyImageID:attachmentID
             };
+
+            if (queryPkg.ephemeralMessage) {
+                console.log("Ephemeral message found, setting as COMPLETE");
+                dbDoc.ephemeralMessage = "COMPLETE";
+            };
             
             var basePWD = "/Users/mikeland/Desktop/Midjourney/";
             
