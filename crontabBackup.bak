@@ -1,3 +1,17 @@
+# also see `sudo crontab -e`
+
+# In order to get the full screen to work
+# crontab is doing screen opening while `sudo crontab` is doing everything else
+# I could move everything from sudo crontab to crontab is I wanted
+# I'd have to adjust some pathways
+
+
+
+
+# DEBUGGING
+# 10 9 * * SAT /bin/bash /Users/mikeland/WeatherWindow/closeChromeReopen.sh >> /Users/mikeland/WeatherWindow.log 2>&1
+
+
 */20 4,8,12,19,21 * * * /bin/bash /Users/mikeland/WeatherWindow/closeChromeReopen.sh >> /Users/mikeland/WeatherWindow.log 2>&1
 
 14,44 4,8,12,19,21 * * * /bin/bash /Users/mikeland/WeatherWindow/setQuery.sh >> /Users/mikeland/WeatherWindow.log 2>&1
@@ -6,23 +20,20 @@
 11,41 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genGeminiImage.js >> /Users/mikeland/WeatherWindow.log 2>&1
 
 17,20,47,50 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/downloadMidjourneyImage.js >> /Users/mikeland/WeatherWindow.log 2>&1
-
-
-
-
-# ADD THESE
 18,21,48,51 4,8,12,19,21 * * * /bin/bash /Users/mikeland/WeatherWindow/repostEphemeralMessage.sh >> /Users/mikeland/WeatherWindow.log 2>&1
-20,23,50,53 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/downloadMidjourneyImage.js >> /Users/mikeland/WeatherWindow.log 2>&1
+19,22,49,52 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/downloadMidjourneyImage.js >> /Users/mikeland/WeatherWindow.log 2>&1
 
-
-
-
-
-
-21,24,51,54 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/tweetImages.js >> /Users/mikeland/WeatherWindow.log 2>&1
+20,23,50,53 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/tweetImages.js >> /Users/mikeland/WeatherWindow.log 2>&1
 
 59 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js midjourneyImage >> /Users/mikeland/WeatherWindow.log 2>&1
 39 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js openAIImage >> /Users/mikeland/WeatherWindow.log 2>&1
 19 4,8,12,19,21 * * * /usr/local/bin/node /Users/mikeland/WeatherWindow/genHTMLPageByPlatform.js stableDiffusionImage >> /Users/mikeland/WeatherWindow.log 2>&1
 
 59 23 * * SUN rm /Users/mikeland/WeatherWindow.log
+
+
+
+
+# Turned off until demand increases
+# 17 12 * * * /usr/local/bin/node /Users/mikeland/infinityRacerLevelGenerator/genLevel.js >> /Users/mikeland/infinityRacerLevelGenerator/genLevel.log 2>&1
+# 58 23 * * SUN rm /Users/mikeland/infinityRacerLevelGenerator/genLevel.log
