@@ -55,7 +55,13 @@ async function postAIImages(aiImagePkgs, query) {
             const mediaId = await client.v1.uploadMedia(aiImagePkg.photoPWD);
             mediaIDs.push(mediaId);
             console.log(aiImagePkg.imageSource, "Twitter Media ID", mediaId);
-            imageSourceNames.push(aiImagePkg.imageSource + " " + aiImagePkg.model)
+
+            var softCensorshipExtension = "";
+            if (aiImagePkg.ephemeralMessage == "COMPLETE") {
+                softCensorshipExtension = " [SOFT-CENSORED] 😡"
+            };
+
+            imageSourceNames.push(aiImagePkg.imageSource + " " + aiImagePkg.model + softCensorshipExtension)
             savePkgs[aiImagePkg.id] = {
                 id: aiImagePkg.id,
                 savePkg:{
