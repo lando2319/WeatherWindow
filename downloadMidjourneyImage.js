@@ -84,9 +84,12 @@ var channelID = "1125566730761154564";
                 midjourneyImageID:attachmentID
             };
 
+            var querySavePkg = {};
+
             if (queryPkg.ephemeralMessage) {
                 console.log("Ephemeral message found, setting as COMPLETE");
                 dbDoc.ephemeralMessage = "COMPLETE";
+                querySavePkg.ephemeralMessage = "COMPLETE";
             };
             
             var basePWD = "/Users/mikeland/Desktop/Midjourney/";
@@ -99,7 +102,10 @@ var channelID = "1125566730761154564";
             console.log("Successfully Setting new Image Doc for Midjourney");
 
             console.log("Setting new Query Doc");
-            await db.collection("WeatherWindowQueries").doc(queryPkg.id).update({midjourneyImage:fileName});
+
+            querySavePkg.midjourneyImage = fileName;
+
+            await db.collection("WeatherWindowQueries").doc(queryPkg.id).update(querySavePkg);
             console.log("Successfully updating file name to for midjourneyImage");
 
             process.exit(0);
