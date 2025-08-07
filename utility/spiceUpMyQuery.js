@@ -32,7 +32,8 @@ function spiceThis(query, spiceRating) {
         "workcut-inspired graphics, illustration style",
         "in meticulously hyper detailed, high contrast, artstation style",
         "in 2d outline vector monochrome coloring page style",
-        "in woodblock style"
+        "in woodblock style",
+        "in no color, white paper background, clean outlines, 2D cartoon sketch style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;

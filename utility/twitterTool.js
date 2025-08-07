@@ -70,7 +70,7 @@ async function postAIImages(aiImagePkgs, query) {
             }
         }
 
-        var msg = "AI Generated Photos\n" + imageSourceNames.join(" | ") + "\n\nPrompt: \"" + query + "\"";
+        var msg = "AI Generated Photos\n" + imageSourceNames.join(" | ") + "\n\n\"" + query + "\"";
         var { data: createdTweet } = await client.v2.tweet(msg, { 
             media: { 
                 media_ids: mediaIDs
