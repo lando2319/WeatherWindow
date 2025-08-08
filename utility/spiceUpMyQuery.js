@@ -35,7 +35,10 @@ function spiceThis(query, spiceRating) {
         "in woodblock style",
         "in no color, white paper background, clean outlines, 2D cartoon sketch style",
         "in steampunk style",
-        "in cyberpunk style"
+        "in cyberpunk style",
+        "in dark fantasy style",
+        "in realistic fantasy style",
+        "in cinematic technological, 4K style"
     ]
 
     const spiceyRandom = Math.floor(Math.random() * 9) + 1;
