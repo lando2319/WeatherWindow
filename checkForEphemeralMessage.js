@@ -1,3 +1,12 @@
+process.env.PATH = [
+  '/usr/local/bin',
+  '/opt/homebrew/bin',
+  '/usr/bin',
+  '/bin',
+  '/usr/sbin',
+  '/sbin'
+].join(':');
+
 const screenshot = require('screenshot-desktop');
 const Tesseract = require('tesseract.js');
 
