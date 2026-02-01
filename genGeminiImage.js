@@ -30,7 +30,7 @@ console.log("========================\n\nStarting WeatherWindow genOpenAIAndTwee
 
 var unixTimeStamp = Date.now();
 
-var modelName = "gemini-2.0-flash-preview-image-generation";
+var modelName = "gemini-2.5-flash-image";
 
 function genDBDoc(queryPkg) {
 
