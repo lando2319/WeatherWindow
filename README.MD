@@ -12,6 +12,7 @@ This code will
 - Python Stable Diffusion file grabs the PENDING query
 - Generates Stable Diffusion Image
 - Generates OpenAI Image
+- Generates Gemini Image
 - Generates Midjourney Image
 - Upload and Tweets images to the fans
 
